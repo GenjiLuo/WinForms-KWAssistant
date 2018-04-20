@@ -14,6 +14,8 @@ namespace KWAssistant.Data
 
         public static List<string> BlackList { get; set; } //黑名单
 
+        public static Setting Setting { get; set; } //设置
+
         static Global()
         {
             //从磁盘文件中读取数据
@@ -21,6 +23,7 @@ namespace KWAssistant.Data
             Tasks = new List<Record>();
             WhiteList = FileUtil.LoadList(Config.WhiteListFilePath);
             BlackList = FileUtil.LoadList(Config.BlackListFilePath);
+            Setting = FileUtil.LoadSetting(Config.SettingFilePath);
         }
     }
 }

@@ -129,7 +129,7 @@
   <data name="nullTip" xml:space="preserve">
     <value>不能为空</value>
   </data>
-  <data name="DoneStatus" xml:space="preserve">
+  <data name="doneStatus" xml:space="preserve">
     <value>已完成</value>
   </data>
   <data name="toDoStatus" xml:space="preserve">
@@ -137,5 +137,8 @@
   </data>
   <data name="readKwError" xml:space="preserve">
     <value>读取关键词列表失败！</value>
+  </data>
+  <data name="invalidTip" xml:space="preserve">
+    <value>无效的数据</value>
   </data>
 </root>

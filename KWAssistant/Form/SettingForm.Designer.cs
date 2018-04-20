@@ -38,16 +38,16 @@
             System.Windows.Forms.Label label7;
             System.Windows.Forms.Label label9;
             System.Windows.Forms.Label label3;
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown3 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown4 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown7 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown8 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown10 = new System.Windows.Forms.NumericUpDown();
-            this.button1 = new System.Windows.Forms.Button();
+            this.pageMin = new System.Windows.Forms.NumericUpDown();
+            this.pageMax = new System.Windows.Forms.NumericUpDown();
+            this.searchMax = new System.Windows.Forms.NumericUpDown();
+            this.searchMin = new System.Windows.Forms.NumericUpDown();
+            this.clickMax = new System.Windows.Forms.NumericUpDown();
+            this.clickMin = new System.Windows.Forms.NumericUpDown();
+            this.timeSpent = new System.Windows.Forms.NumericUpDown();
+            this.saveButton = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.button2 = new System.Windows.Forms.Button();
+            this.cancelButton = new System.Windows.Forms.Button();
             label1 = new System.Windows.Forms.Label();
             label2 = new System.Windows.Forms.Label();
             label4 = new System.Windows.Forms.Label();
@@ -56,13 +56,13 @@
             label7 = new System.Windows.Forms.Label();
             label9 = new System.Windows.Forms.Label();
             label3 = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown7)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown8)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown10)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pageMin)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pageMax)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.searchMax)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.searchMin)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.clickMax)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.clickMin)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.timeSpent)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -93,183 +93,213 @@
             // 
             resources.ApplyResources(label6, "label6");
             label6.Name = "label6";
+            this.toolTip1.SetToolTip(label6, resources.GetString("label6.ToolTip"));
             // 
             // label7
             // 
             resources.ApplyResources(label7, "label7");
             label7.Name = "label7";
+            this.toolTip1.SetToolTip(label7, resources.GetString("label7.ToolTip"));
             // 
             // label9
             // 
             resources.ApplyResources(label9, "label9");
             label9.Name = "label9";
+            this.toolTip1.SetToolTip(label9, resources.GetString("label9.ToolTip"));
             // 
             // label3
             // 
             resources.ApplyResources(label3, "label3");
             label3.Name = "label3";
+            this.toolTip1.SetToolTip(label3, resources.GetString("label3.ToolTip"));
             // 
-            // numericUpDown1
+            // pageMin
             // 
-            resources.ApplyResources(this.numericUpDown1, "numericUpDown1");
-            this.numericUpDown1.Maximum = new decimal(new int[] {
+            resources.ApplyResources(this.pageMin, "pageMin");
+            this.pageMin.Maximum = new decimal(new int[] {
             100000,
             0,
             0,
             0});
-            this.numericUpDown1.Minimum = new decimal(new int[] {
+            this.pageMin.Minimum = new decimal(new int[] {
             1,
             0,
             0,
             0});
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Value = new decimal(new int[] {
+            this.pageMin.Name = "pageMin";
+            this.toolTip1.SetToolTip(this.pageMin, resources.GetString("pageMin.ToolTip"));
+            this.pageMin.Value = new decimal(new int[] {
             1,
             0,
             0,
             0});
+            this.pageMin.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numericUpDown_KeyPress);
+            this.pageMin.Leave += new System.EventHandler(this.numericUpDown_Leave);
             // 
-            // numericUpDown2
+            // pageMax
             // 
-            resources.ApplyResources(this.numericUpDown2, "numericUpDown2");
-            this.numericUpDown2.Maximum = new decimal(new int[] {
+            resources.ApplyResources(this.pageMax, "pageMax");
+            this.pageMax.Maximum = new decimal(new int[] {
             100000,
             0,
             0,
             0});
-            this.numericUpDown2.Minimum = new decimal(new int[] {
+            this.pageMax.Minimum = new decimal(new int[] {
             1,
             0,
             0,
             0});
-            this.numericUpDown2.Name = "numericUpDown2";
-            this.numericUpDown2.Value = new decimal(new int[] {
+            this.pageMax.Name = "pageMax";
+            this.toolTip1.SetToolTip(this.pageMax, resources.GetString("pageMax.ToolTip"));
+            this.pageMax.Value = new decimal(new int[] {
             3,
             0,
             0,
             0});
+            this.pageMax.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numericUpDown_KeyPress);
+            this.pageMax.Leave += new System.EventHandler(this.numericUpDown_Leave);
             // 
-            // numericUpDown3
+            // searchMax
             // 
-            resources.ApplyResources(this.numericUpDown3, "numericUpDown3");
-            this.numericUpDown3.Maximum = new decimal(new int[] {
+            resources.ApplyResources(this.searchMax, "searchMax");
+            this.searchMax.Maximum = new decimal(new int[] {
             100000,
             0,
             0,
             0});
-            this.numericUpDown3.Name = "numericUpDown3";
-            this.numericUpDown3.Value = new decimal(new int[] {
+            this.searchMax.Name = "searchMax";
+            this.toolTip1.SetToolTip(this.searchMax, resources.GetString("searchMax.ToolTip"));
+            this.searchMax.Value = new decimal(new int[] {
             3,
             0,
             0,
             0});
+            this.searchMax.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numericUpDown_KeyPress);
+            this.searchMax.Leave += new System.EventHandler(this.numericUpDown_Leave);
             // 
-            // numericUpDown4
+            // searchMin
             // 
-            resources.ApplyResources(this.numericUpDown4, "numericUpDown4");
-            this.numericUpDown4.Maximum = new decimal(new int[] {
+            resources.ApplyResources(this.searchMin, "searchMin");
+            this.searchMin.Maximum = new decimal(new int[] {
             100000,
             0,
             0,
             0});
-            this.numericUpDown4.Name = "numericUpDown4";
-            this.numericUpDown4.Value = new decimal(new int[] {
+            this.searchMin.Name = "searchMin";
+            this.toolTip1.SetToolTip(this.searchMin, resources.GetString("searchMin.ToolTip"));
+            this.searchMin.Value = new decimal(new int[] {
             1,
             0,
             0,
             0});
+            this.searchMin.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numericUpDown_KeyPress);
+            this.searchMin.Leave += new System.EventHandler(this.numericUpDown_Leave);
             // 
-            // numericUpDown7
+            // clickMax
             // 
-            resources.ApplyResources(this.numericUpDown7, "numericUpDown7");
-            this.numericUpDown7.Maximum = new decimal(new int[] {
+            resources.ApplyResources(this.clickMax, "clickMax");
+            this.clickMax.Maximum = new decimal(new int[] {
             100000,
             0,
             0,
             0});
-            this.numericUpDown7.Name = "numericUpDown7";
-            this.numericUpDown7.Value = new decimal(new int[] {
+            this.clickMax.Name = "clickMax";
+            this.toolTip1.SetToolTip(this.clickMax, resources.GetString("clickMax.ToolTip"));
+            this.clickMax.Value = new decimal(new int[] {
             10,
             0,
             0,
             0});
+            this.clickMax.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numericUpDown_KeyPress);
+            this.clickMax.Leave += new System.EventHandler(this.numericUpDown_Leave);
             // 
-            // numericUpDown8
+            // clickMin
             // 
-            resources.ApplyResources(this.numericUpDown8, "numericUpDown8");
-            this.numericUpDown8.Maximum = new decimal(new int[] {
+            resources.ApplyResources(this.clickMin, "clickMin");
+            this.clickMin.Maximum = new decimal(new int[] {
             100000,
             0,
             0,
             0});
-            this.numericUpDown8.Name = "numericUpDown8";
-            this.numericUpDown8.Value = new decimal(new int[] {
+            this.clickMin.Name = "clickMin";
+            this.toolTip1.SetToolTip(this.clickMin, resources.GetString("clickMin.ToolTip"));
+            this.clickMin.Value = new decimal(new int[] {
             5,
             0,
             0,
             0});
+            this.clickMin.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numericUpDown_KeyPress);
+            this.clickMin.Leave += new System.EventHandler(this.numericUpDown_Leave);
             // 
-            // numericUpDown10
+            // timeSpent
             // 
-            resources.ApplyResources(this.numericUpDown10, "numericUpDown10");
-            this.numericUpDown10.Maximum = new decimal(new int[] {
+            resources.ApplyResources(this.timeSpent, "timeSpent");
+            this.timeSpent.Maximum = new decimal(new int[] {
             100000,
             0,
             0,
             0});
-            this.numericUpDown10.Minimum = new decimal(new int[] {
+            this.timeSpent.Minimum = new decimal(new int[] {
             1,
             0,
             0,
             0});
-            this.numericUpDown10.Name = "numericUpDown10";
-            this.numericUpDown10.Value = new decimal(new int[] {
+            this.timeSpent.Name = "timeSpent";
+            this.toolTip1.SetToolTip(this.timeSpent, resources.GetString("timeSpent.ToolTip"));
+            this.timeSpent.Value = new decimal(new int[] {
             30,
             0,
             0,
             0});
+            this.timeSpent.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numericUpDown_KeyPress);
+            this.timeSpent.Leave += new System.EventHandler(this.numericUpDown_Leave);
             // 
-            // button1
+            // saveButton
             // 
-            resources.ApplyResources(this.button1, "button1");
-            this.button1.Name = "button1";
-            this.button1.UseVisualStyleBackColor = true;
+            resources.ApplyResources(this.saveButton, "saveButton");
+            this.saveButton.Name = "saveButton";
+            this.toolTip1.SetToolTip(this.saveButton, resources.GetString("saveButton.ToolTip"));
+            this.saveButton.UseVisualStyleBackColor = true;
+            this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
             // 
-            // button2
+            // cancelButton
             // 
-            resources.ApplyResources(this.button2, "button2");
-            this.button2.Name = "button2";
-            this.button2.UseVisualStyleBackColor = true;
+            resources.ApplyResources(this.cancelButton, "cancelButton");
+            this.cancelButton.Name = "cancelButton";
+            this.toolTip1.SetToolTip(this.cancelButton, resources.GetString("cancelButton.ToolTip"));
+            this.cancelButton.UseVisualStyleBackColor = true;
+            this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
             // 
             // SettingForm
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.cancelButton);
             this.Controls.Add(label3);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.numericUpDown10);
+            this.Controls.Add(this.saveButton);
+            this.Controls.Add(this.timeSpent);
             this.Controls.Add(label9);
-            this.Controls.Add(this.numericUpDown7);
-            this.Controls.Add(this.numericUpDown8);
+            this.Controls.Add(this.clickMax);
+            this.Controls.Add(this.clickMin);
             this.Controls.Add(label7);
-            this.Controls.Add(this.numericUpDown3);
-            this.Controls.Add(this.numericUpDown4);
+            this.Controls.Add(this.searchMax);
+            this.Controls.Add(this.searchMin);
             this.Controls.Add(label6);
-            this.Controls.Add(this.numericUpDown2);
-            this.Controls.Add(this.numericUpDown1);
+            this.Controls.Add(this.pageMax);
+            this.Controls.Add(this.pageMin);
             this.Controls.Add(label5);
             this.Controls.Add(label4);
             this.Controls.Add(label2);
             this.Controls.Add(label1);
             this.Name = "SettingForm";
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown7)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown8)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown10)).EndInit();
+            this.toolTip1.SetToolTip(this, resources.GetString("$this.ToolTip"));
+            ((System.ComponentModel.ISupportInitialize)(this.pageMin)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pageMax)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.searchMax)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.searchMin)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.clickMax)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.clickMin)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.timeSpent)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -277,15 +307,15 @@
 
         #endregion
 
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
-        private System.Windows.Forms.NumericUpDown numericUpDown2;
-        private System.Windows.Forms.NumericUpDown numericUpDown3;
-        private System.Windows.Forms.NumericUpDown numericUpDown4;
-        private System.Windows.Forms.NumericUpDown numericUpDown7;
-        private System.Windows.Forms.NumericUpDown numericUpDown8;
-        private System.Windows.Forms.NumericUpDown numericUpDown10;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.NumericUpDown pageMin;
+        private System.Windows.Forms.NumericUpDown pageMax;
+        private System.Windows.Forms.NumericUpDown searchMax;
+        private System.Windows.Forms.NumericUpDown searchMin;
+        private System.Windows.Forms.NumericUpDown clickMax;
+        private System.Windows.Forms.NumericUpDown clickMin;
+        private System.Windows.Forms.NumericUpDown timeSpent;
+        private System.Windows.Forms.Button saveButton;
         private System.Windows.Forms.ToolTip toolTip1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button cancelButton;
     }
 }

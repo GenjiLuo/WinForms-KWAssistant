@@ -72,9 +72,9 @@ namespace KWAssistant.Properties {
         /// <summary>
         ///   查找类似 Done 的本地化字符串。
         /// </summary>
-        internal static string DoneStatus {
+        internal static string doneStatus {
             get {
-                return ResourceManager.GetString("DoneStatus", resourceCulture);
+                return ResourceManager.GetString("doneStatus", resourceCulture);
             }
         }
         
@@ -84,6 +84,15 @@ namespace KWAssistant.Properties {
         internal static string existTip {
             get {
                 return ResourceManager.GetString("existTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Invalid data 的本地化字符串。
+        /// </summary>
+        internal static string invalidTip {
+            get {
+                return ResourceManager.GetString("invalidTip", resourceCulture);
             }
         }
         

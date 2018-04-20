@@ -56,10 +56,10 @@ namespace KWAssistant.Form
         /// </summary>
         private void SizeAdaptive()
         {
-            //设置任务列表中Url列的列宽
+            //设置任务列表中Status列的列宽
             taskListView.Columns[3].Width =
                 taskListView.ClientSize.Width - taskListView.Columns[0].Width - taskListView.Columns[1].Width -
-                taskListView.Columns[2].Width - taskListView.Columns[4].Width;
+                taskListView.Columns[2].Width;
 
             //设置日志列表中Url列的列宽
             logListView.Columns[3].Width =

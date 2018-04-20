@@ -52,6 +52,7 @@
     <Compile Include="Data\Model\Config.cs" />
     <Compile Include="Data\Model\Group.cs" />
     <Compile Include="Data\Model\Record.cs" />
+    <Compile Include="Data\Model\Setting.cs" />
     <Compile Include="Form\BlackListForm.cs">
       <SubType>Form</SubType>
     </Compile>

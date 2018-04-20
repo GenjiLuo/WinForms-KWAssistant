@@ -46,6 +46,17 @@ namespace KWAssistant.Util
         }
 
         /// <summary>
+        /// 读取设置文件
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
+        public static Setting LoadSetting(string path)
+        {
+            if (!File.Exists(path)) return new Setting();
+            return JsonConvert.DeserializeObject<Setting>(File.ReadAllText(path));
+        }
+
+        /// <summary>
         /// 保存关键词到文件
         /// </summary>
         /// <param name="path"></param>
@@ -68,6 +79,16 @@ namespace KWAssistant.Util
         public static void SaveList(string path, List<string> list)
         {
             File.WriteAllText(path, JArray.Parse(JsonConvert.SerializeObject(list)).ToString());
+        }
+
+        /// <summary>
+        /// 保存设置文件
+        /// </summary>
+        /// <param name="path"></param>
+        /// <param name="setting"></param>
+        public static void SaveSetting(string path, Setting setting)
+        {
+            File.WriteAllText(path, JObject.Parse(JsonConvert.SerializeObject(setting)).ToString());
         }
     }
 }
