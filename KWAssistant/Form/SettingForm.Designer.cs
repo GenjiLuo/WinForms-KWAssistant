@@ -93,25 +93,21 @@
             // 
             resources.ApplyResources(label6, "label6");
             label6.Name = "label6";
-            this.toolTip1.SetToolTip(label6, resources.GetString("label6.ToolTip"));
             // 
             // label7
             // 
             resources.ApplyResources(label7, "label7");
             label7.Name = "label7";
-            this.toolTip1.SetToolTip(label7, resources.GetString("label7.ToolTip"));
             // 
             // label9
             // 
             resources.ApplyResources(label9, "label9");
             label9.Name = "label9";
-            this.toolTip1.SetToolTip(label9, resources.GetString("label9.ToolTip"));
             // 
             // label3
             // 
             resources.ApplyResources(label3, "label3");
             label3.Name = "label3";
-            this.toolTip1.SetToolTip(label3, resources.GetString("label3.ToolTip"));
             // 
             // pageMin
             // 
@@ -127,7 +123,6 @@
             0,
             0});
             this.pageMin.Name = "pageMin";
-            this.toolTip1.SetToolTip(this.pageMin, resources.GetString("pageMin.ToolTip"));
             this.pageMin.Value = new decimal(new int[] {
             1,
             0,
@@ -150,7 +145,6 @@
             0,
             0});
             this.pageMax.Name = "pageMax";
-            this.toolTip1.SetToolTip(this.pageMax, resources.GetString("pageMax.ToolTip"));
             this.pageMax.Value = new decimal(new int[] {
             3,
             0,
@@ -168,7 +162,6 @@
             0,
             0});
             this.searchMax.Name = "searchMax";
-            this.toolTip1.SetToolTip(this.searchMax, resources.GetString("searchMax.ToolTip"));
             this.searchMax.Value = new decimal(new int[] {
             3,
             0,
@@ -186,7 +179,6 @@
             0,
             0});
             this.searchMin.Name = "searchMin";
-            this.toolTip1.SetToolTip(this.searchMin, resources.GetString("searchMin.ToolTip"));
             this.searchMin.Value = new decimal(new int[] {
             1,
             0,
@@ -204,7 +196,6 @@
             0,
             0});
             this.clickMax.Name = "clickMax";
-            this.toolTip1.SetToolTip(this.clickMax, resources.GetString("clickMax.ToolTip"));
             this.clickMax.Value = new decimal(new int[] {
             10,
             0,
@@ -222,7 +213,6 @@
             0,
             0});
             this.clickMin.Name = "clickMin";
-            this.toolTip1.SetToolTip(this.clickMin, resources.GetString("clickMin.ToolTip"));
             this.clickMin.Value = new decimal(new int[] {
             5,
             0,
@@ -245,7 +235,6 @@
             0,
             0});
             this.timeSpent.Name = "timeSpent";
-            this.toolTip1.SetToolTip(this.timeSpent, resources.GetString("timeSpent.ToolTip"));
             this.timeSpent.Value = new decimal(new int[] {
             30,
             0,
@@ -258,7 +247,6 @@
             // 
             resources.ApplyResources(this.saveButton, "saveButton");
             this.saveButton.Name = "saveButton";
-            this.toolTip1.SetToolTip(this.saveButton, resources.GetString("saveButton.ToolTip"));
             this.saveButton.UseVisualStyleBackColor = true;
             this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
             // 
@@ -266,7 +254,6 @@
             // 
             resources.ApplyResources(this.cancelButton, "cancelButton");
             this.cancelButton.Name = "cancelButton";
-            this.toolTip1.SetToolTip(this.cancelButton, resources.GetString("cancelButton.ToolTip"));
             this.cancelButton.UseVisualStyleBackColor = true;
             this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
             // 
@@ -291,8 +278,10 @@
             this.Controls.Add(label4);
             this.Controls.Add(label2);
             this.Controls.Add(label1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "SettingForm";
-            this.toolTip1.SetToolTip(this, resources.GetString("$this.ToolTip"));
             ((System.ComponentModel.ISupportInitialize)(this.pageMin)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pageMax)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.searchMax)).EndInit();

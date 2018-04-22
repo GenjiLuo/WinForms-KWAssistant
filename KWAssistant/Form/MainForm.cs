@@ -75,7 +75,7 @@ namespace KWAssistant.Form
         /// <param name="keyword"></param>
         /// <param name="url"></param>
         /// <param name="status"></param>
-        private void AddTaskItem(int id, string groupName, string keyword, string url, string status)
+        private void AddTaskItem(int id, string groupName, string keyword, string status)
         {
             var record = new Record
             {
@@ -88,7 +88,6 @@ namespace KWAssistant.Form
             var item = new ListViewItem(id.ToString());
             item.SubItems.Add(groupName);
             item.SubItems.Add(keyword);
-            item.SubItems.Add(url);
             item.SubItems.Add(status);
             taskListView.Items.Add(item);
         }
@@ -155,7 +154,14 @@ namespace KWAssistant.Form
         private void newGroupToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var newGroupForm = new NewGroupForm { StartPosition = FormStartPosition.CenterParent };
-            newGroupForm.AddNewGroupToViewEvent += name => { kwTreeView.Nodes.Add(name); };
+            newGroupForm.AddNewGroupEvent += name =>
+            {
+                Global.Groups.Add(new Group { Name = name });
+                //持久化
+                new Task(() => { FileUtil.SaveKeywords(Config.KeywordFilePath, Global.Groups); }).Start();
+                //更新视图
+                kwTreeView.Nodes.Add(name);
+            };
             newGroupForm.ShowDialog();
         }
 
@@ -178,6 +184,8 @@ namespace KWAssistant.Form
             {
                 var index = Global.Groups.FindIndex(g => g.Name == newGroup.Name);
                 Global.Groups[index] = newGroup;
+                //持久化
+                new Task(() => { FileUtil.SaveKeywords(Config.KeywordFilePath, Global.Groups); }).Start();
                 //更新视图数据
                 var nodes = kwTreeView.Nodes[index].Nodes;
                 nodes.Clear();
@@ -197,12 +205,12 @@ namespace KWAssistant.Form
                 var index = Global.Tasks.Count;
                 foreach (TreeNode child in selectNode.Nodes)
                 {
-                    AddTaskItem(++index, selectNode.Text, child.Text, "", Resources.toDoStatus);
+                    AddTaskItem(++index, selectNode.Text, child.Text, Resources.toDoStatus);
                 }
             }
             else if (selectNode.Level == 1) //添加单个关键词到任务列表
             {
-                AddTaskItem(Global.Tasks.Count + 1, selectNode.Parent.Text, selectNode.Text, "", Resources.toDoStatus);
+                AddTaskItem(Global.Tasks.Count + 1, selectNode.Parent.Text, selectNode.Text, Resources.toDoStatus);
             }
         }
 
@@ -221,7 +229,9 @@ namespace KWAssistant.Form
         #region 任务列表按钮点击事件
         private void newTaskButton_Click(object sender, EventArgs e)
         {
-            //todo
+            var newTaskForm = new NewTaskForm { StartPosition = FormStartPosition.CenterParent };
+            newTaskForm.AddTaskEvent += (id, keyword) => { AddTaskItem(id, "", keyword, Resources.toDoStatus); };
+            newTaskForm.ShowDialog();
         }
 
         private void clickModeButton_Click(object sender, EventArgs e)

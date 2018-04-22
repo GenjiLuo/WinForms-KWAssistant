@@ -1,19 +1,16 @@
 ﻿using KWAssistant.Data;
-using KWAssistant.Data.Model;
 using KWAssistant.Properties;
-using KWAssistant.Util;
 using System;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace KWAssistant.Form
 {
     public partial class NewGroupForm : System.Windows.Forms.Form
     {
-        public delegate void AddNewGroupToView(string name);
+        public delegate void AddNewGroup(string name);
 
-        public event AddNewGroupToView AddNewGroupToViewEvent;  //把输入的组名传回主窗体
+        public event AddNewGroup AddNewGroupEvent;  //添加新分组
 
         public NewGroupForm()
         {
@@ -43,9 +40,7 @@ namespace KWAssistant.Form
             }
             else
             {
-                Global.Groups.Add(new Group { Name = name });
-                AddNewGroupToViewEvent?.Invoke(name);
-                new Task(() => { FileUtil.SaveKeywords(Config.KeywordFilePath, Global.Groups); }).Start();
+                AddNewGroupEvent?.Invoke(name);
                 Close();
             }
         }

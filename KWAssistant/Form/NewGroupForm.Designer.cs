@@ -68,6 +68,9 @@
             this.Controls.Add(label1);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.SaveButton);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "NewGroupForm";
             this.Activated += new System.EventHandler(this.NewGroupForm_Activated);
             this.ResumeLayout(false);

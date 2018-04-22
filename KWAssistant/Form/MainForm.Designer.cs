@@ -30,8 +30,8 @@
         {
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.MenuStrip menuStrip1;
-            System.Windows.Forms.SplitContainer splitContainer1;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
+            System.Windows.Forms.SplitContainer splitContainer1;
             System.Windows.Forms.GroupBox groupBox1;
             System.Windows.Forms.SplitContainer splitContainer2;
             System.Windows.Forms.GroupBox groupBox2;
@@ -50,6 +50,10 @@
             System.Windows.Forms.Panel panel2;
             System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
             System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel3;
+            this.settingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.whiteListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.blackListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.kwTreeView = new System.Windows.Forms.TreeView();
             this.kwContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.newGroupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -66,10 +70,6 @@
             this.clickModeButton = new System.Windows.Forms.Button();
             this.newTaskButton = new System.Windows.Forms.Button();
             this.logListView = new System.Windows.Forms.ListView();
-            this.settingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.whiteListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.blackListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.currentTaskLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel4 = new System.Windows.Forms.ToolStripStatusLabel();
@@ -122,6 +122,30 @@
             this.aboutToolStripMenuItem});
             resources.ApplyResources(menuStrip1, "menuStrip1");
             menuStrip1.Name = "menuStrip1";
+            // 
+            // settingToolStripMenuItem
+            // 
+            this.settingToolStripMenuItem.Name = "settingToolStripMenuItem";
+            resources.ApplyResources(this.settingToolStripMenuItem, "settingToolStripMenuItem");
+            this.settingToolStripMenuItem.Click += new System.EventHandler(this.settingToolStripMenuItem_Click);
+            // 
+            // whiteListToolStripMenuItem
+            // 
+            this.whiteListToolStripMenuItem.Name = "whiteListToolStripMenuItem";
+            resources.ApplyResources(this.whiteListToolStripMenuItem, "whiteListToolStripMenuItem");
+            this.whiteListToolStripMenuItem.Click += new System.EventHandler(this.whiteListToolStripMenuItem_Click);
+            // 
+            // blackListToolStripMenuItem
+            // 
+            this.blackListToolStripMenuItem.Name = "blackListToolStripMenuItem";
+            resources.ApplyResources(this.blackListToolStripMenuItem, "blackListToolStripMenuItem");
+            this.blackListToolStripMenuItem.Click += new System.EventHandler(this.blackListToolStripMenuItem_Click);
+            // 
+            // aboutToolStripMenuItem
+            // 
+            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            resources.ApplyResources(this.aboutToolStripMenuItem, "aboutToolStripMenuItem");
+            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
             // splitContainer1
             // 
@@ -347,30 +371,6 @@
             // columnHeader10
             // 
             resources.ApplyResources(columnHeader10, "columnHeader10");
-            // 
-            // settingToolStripMenuItem
-            // 
-            this.settingToolStripMenuItem.Name = "settingToolStripMenuItem";
-            resources.ApplyResources(this.settingToolStripMenuItem, "settingToolStripMenuItem");
-            this.settingToolStripMenuItem.Click += new System.EventHandler(this.settingToolStripMenuItem_Click);
-            // 
-            // whiteListToolStripMenuItem
-            // 
-            this.whiteListToolStripMenuItem.Name = "whiteListToolStripMenuItem";
-            resources.ApplyResources(this.whiteListToolStripMenuItem, "whiteListToolStripMenuItem");
-            this.whiteListToolStripMenuItem.Click += new System.EventHandler(this.whiteListToolStripMenuItem_Click);
-            // 
-            // blackListToolStripMenuItem
-            // 
-            this.blackListToolStripMenuItem.Name = "blackListToolStripMenuItem";
-            resources.ApplyResources(this.blackListToolStripMenuItem, "blackListToolStripMenuItem");
-            this.blackListToolStripMenuItem.Click += new System.EventHandler(this.blackListToolStripMenuItem_Click);
-            // 
-            // aboutToolStripMenuItem
-            // 
-            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            resources.ApplyResources(this.aboutToolStripMenuItem, "aboutToolStripMenuItem");
-            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
             // panel1
             // 

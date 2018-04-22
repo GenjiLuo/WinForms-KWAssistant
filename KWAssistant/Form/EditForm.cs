@@ -1,9 +1,6 @@
-﻿using KWAssistant.Data;
-using KWAssistant.Data.Model;
-using KWAssistant.Util;
+﻿using KWAssistant.Data.Model;
 using System;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace KWAssistant.Form
 {
@@ -15,9 +12,9 @@ namespace KWAssistant.Form
 
         public delegate void UpdateGroup(Group newGroup);
 
-        public event LoadGroup LoadGroupEvent;  //把指定分组数据从主窗口传递过来
+        public event LoadGroup LoadGroupEvent;  //把指定分组信息加载到当前窗口
 
-        public event UpdateGroup updateGroupEvent;  //把修改后的分组数据传回主窗口
+        public event UpdateGroup updateGroupEvent;  //更新指定分组信息
 
         public EditForm()
         {
@@ -50,7 +47,6 @@ namespace KWAssistant.Form
             var keywords = editTextBox.Text.Split(new[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
             _group.Keywords = keywords.ToList();
             updateGroupEvent?.Invoke(_group);
-            new Task(() => { FileUtil.SaveKeywords(Config.KeywordFilePath, Global.Groups); }).Start();
             Close();
         }
     }
