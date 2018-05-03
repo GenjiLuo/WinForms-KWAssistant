@@ -8,9 +8,7 @@ namespace KWAssistant.Form
 {
     public partial class NewGroupForm : System.Windows.Forms.Form
     {
-        public delegate void AddNewGroup(string name);
-
-        public event AddNewGroup AddNewGroupEvent;  //添加新分组
+        public event Action<string> AddNewGroupEvent;  //添加新分组
 
         public NewGroupForm()
         {

@@ -7,9 +7,7 @@ namespace KWAssistant.Form
 {
     public partial class NewTaskForm : System.Windows.Forms.Form
     {
-        public delegate void AddTask(int id, string keyword);
-
-        public event AddTask AddTaskEvent;
+        public event Action<int, string> AddTaskEvent;
 
         public NewTaskForm()
         {

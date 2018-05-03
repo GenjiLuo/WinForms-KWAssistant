@@ -8,13 +8,9 @@ namespace KWAssistant.Form
     {
         private Group _group;
 
-        public delegate Group LoadGroup();
+        public event Func<Group> LoadGroupEvent;  //把指定分组信息加载到当前窗口
 
-        public delegate void UpdateGroup(Group newGroup);
-
-        public event LoadGroup LoadGroupEvent;  //把指定分组信息加载到当前窗口
-
-        public event UpdateGroup updateGroupEvent;  //更新指定分组信息
+        public event Action<Group> UpdateGroupEvent;  //更新指定分组信息
 
         public EditForm()
         {
@@ -46,7 +42,7 @@ namespace KWAssistant.Form
         {
             var keywords = editTextBox.Text.Split(new[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
             _group.Keywords = keywords.ToList();
-            updateGroupEvent?.Invoke(_group);
+            UpdateGroupEvent?.Invoke(_group);
             Close();
         }
     }

@@ -73,7 +73,6 @@ namespace KWAssistant.Form
         /// <param name="id"></param>
         /// <param name="groupName"></param>
         /// <param name="keyword"></param>
-        /// <param name="url"></param>
         /// <param name="status"></param>
         private void AddTaskItem(int id, string groupName, string keyword, string status)
         {
@@ -180,7 +179,7 @@ namespace KWAssistant.Form
             var group = Global.Groups[kwTreeView.SelectedNode.Index];
             var editForm = new EditForm { StartPosition = FormStartPosition.CenterParent };
             editForm.LoadGroupEvent += () => group;
-            editForm.updateGroupEvent += newGroup =>
+            editForm.UpdateGroupEvent += newGroup =>
             {
                 var index = Global.Groups.FindIndex(g => g.Name == newGroup.Name);
                 Global.Groups[index] = newGroup;
