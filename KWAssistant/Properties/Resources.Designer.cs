@@ -61,6 +61,15 @@ namespace KWAssistant.Properties {
         }
         
         /// <summary>
+        ///   查找类似 Task is running... 的本地化字符串。
+        /// </summary>
+        internal static string CannotAddTask {
+            get {
+                return ResourceManager.GetString("CannotAddTask", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Are you sure you want to delete? 的本地化字符串。
         /// </summary>
         internal static string deleteTip {
@@ -84,6 +93,15 @@ namespace KWAssistant.Properties {
         internal static string existTip {
             get {
                 return ResourceManager.GetString("existTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 ignore 的本地化字符串。
+        /// </summary>
+        internal static string ignoreTask {
+            get {
+                return ResourceManager.GetString("ignoreTask", resourceCulture);
             }
         }
         

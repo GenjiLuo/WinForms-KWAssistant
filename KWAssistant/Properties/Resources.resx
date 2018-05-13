@@ -141,4 +141,10 @@
   <data name="invalidTip" xml:space="preserve">
     <value>Invalid data</value>
   </data>
+  <data name="CannotAddTask" xml:space="preserve">
+    <value>Task is running...</value>
+  </data>
+  <data name="ignoreTask" xml:space="preserve">
+    <value>ignore</value>
+  </data>
 </root>

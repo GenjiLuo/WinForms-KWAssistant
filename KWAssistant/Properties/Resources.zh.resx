@@ -141,4 +141,10 @@
   <data name="invalidTip" xml:space="preserve">
     <value>无效的数据</value>
   </data>
+  <data name="CannotAddTask" xml:space="preserve">
+    <value>任务正在执行中...</value>
+  </data>
+  <data name="ignoreTask" xml:space="preserve">
+    <value>跳过</value>
+  </data>
 </root>

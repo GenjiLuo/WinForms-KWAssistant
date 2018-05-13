@@ -1,17 +1,23 @@
-﻿using KWAssistant.Data;
-using System;
-using System.Drawing;
-using System.Windows.Forms;
+﻿using AngleSharp.Parser.Html;
+using KWAssistant.Data;
 using KWAssistant.Data.Model;
 using KWAssistant.Properties;
-using System.Linq;
-using System.Threading.Tasks;
 using KWAssistant.Util;
+using System;
+using System.Diagnostics;
+using System.Drawing;
+using System.Linq;
+using System.Net.Http;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace KWAssistant.Form
 {
     public partial class MainForm : System.Windows.Forms.Form
     {
+        private bool _flag = false; //任务是否在执行
+
         public MainForm()
         {
             InitializeComponent();
@@ -89,6 +95,49 @@ namespace KWAssistant.Form
             item.SubItems.Add(keyword);
             item.SubItems.Add(status);
             taskListView.Items.Add(item);
+        }
+        /// <summary>
+        /// 打印日志
+        /// </summary>
+        /// <param name="record"></param>
+        private void AddLogItem(Record record)
+        {
+            var item = new ListViewItem(record.Id.ToString());
+            item.SubItems.Add(record.Keyword);
+            item.SubItems.Add(record.Title);
+            item.SubItems.Add(record.Url?.ToString());
+            item.SubItems.Add(record.DwellTime);
+            item.SubItems.Add(record.Ip);
+            if (record.DwellTime == Resources.ignoreTask) item.ForeColor = Color.Blue;
+            logListView.Items.Add(item);
+        }
+
+        /// <summary>
+        /// 停止执行任务，按钮回复默认状态
+        /// </summary>
+        private void Button_Enabled()
+        {
+            newTaskButton.Enabled = true;
+            clickModeButton.Enabled = true;
+            quickModeButton.Enabled = true;
+            stopButton.Enabled = false;
+            cleanTaskButton.Enabled = true;
+            loopCheckBox.Enabled = true;
+            _flag = false;
+        }
+
+        /// <summary>
+        /// 开始执行任务，启用停止按钮，禁用其他按钮
+        /// </summary>
+        private void Button_Disabled()
+        {
+            newTaskButton.Enabled = false;
+            clickModeButton.Enabled = false;
+            quickModeButton.Enabled = false;
+            stopButton.Enabled = true;
+            cleanTaskButton.Enabled = false;
+            loopCheckBox.Enabled = false;
+            _flag = true;
         }
         #endregion
 
@@ -198,6 +247,11 @@ namespace KWAssistant.Form
 
         private void addToTaskToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (_flag)  //执行过程中不允许添加任务
+            {
+                MessageBox.Show(Resources.CannotAddTask, Resources.Tip, MessageBoxButtons.OK);
+                return;
+            }
             var selectNode = kwTreeView.SelectedNode;
             if (selectNode.Level == 0)  //添加分组到任务列表
             {
@@ -235,23 +289,103 @@ namespace KWAssistant.Form
 
         private void clickModeButton_Click(object sender, EventArgs e)
         {
+            Button_Disabled();
+
             //todo
+
+            Button_Enabled();
         }
 
-        private void quickModeButton_Click(object sender, EventArgs e)
+        private async void quickModeButton_Click(object sender, EventArgs e)
         {
-            //todo
+            Button_Disabled();
+
+            const int millisecondDelay = 1000;
+            var parser = new HtmlParser();
+            using (var client = new HttpClient())
+            {
+                do
+                {
+                    foreach (var record in Global.Tasks)
+                    {
+                        record.Status = Resources.toDoStatus;   //更改任务状态为等待中
+                        var item = taskListView.Items[record.Id - 1];
+                        item.SubItems[3] = new ListViewItem.ListViewSubItem(item, record.Status);   //更新界面
+                    }
+                    foreach (var record in Global.Tasks)
+                    {
+                        var page = Global.Setting.PageMin;
+                        while (page <= Global.Setting.PageMax)  //浏览页数
+                        {
+                            taskListView.Items[record.Id - 1].Selected = true;  //选中该任务所在的行，突出显示
+                            taskListView.EnsureVisible(record.Id - 1);  //滚动条划到该行
+
+                            var address = $"http://www.baidu.com/s?wd={record.Keyword}&pn={(page - 1) * 10}"; //搜索关键字+页数
+                            var res = await client.GetAsync(address);
+                            var document = parser.Parse(await res.Content.ReadAsStringAsync());
+                            var cells = document.QuerySelectorAll("h3.t a"); //取得搜索结果列表
+                            foreach (var cell in cells)
+                            {
+                                if (!_flag) return;
+                                var title = cell.TextContent; //标题
+                                var link = cell.GetAttribute("href");   //链接
+
+                                if (!Global.BlackList.Any()
+                                    && !Global.WhiteList.Any(s => title.Contains(s))
+                                    || Global.BlackList.Any(s => title.Contains(s)))    //判断是否符合黑白名单规则
+                                {
+                                    Debug.WriteLine($"{title}, ThreadId: {Thread.CurrentThread.ManagedThreadId}, isPoolThread: {Thread.CurrentThread.IsThreadPoolThread}");
+                                    var startTime = Environment.TickCount;
+                                    try
+                                    {
+                                        res = await client.GetAsync(link);  //访问链接
+                                    }
+                                    catch (Exception ex)
+                                    {
+                                        Debug.WriteLine(ex.Message);
+                                    };
+                                    var endTime = Environment.TickCount;
+                                    record.Url = res.RequestMessage.RequestUri; //真实Uri
+                                    record.DwellTime = $"{endTime - startTime} ms"; //耗时
+                                    await Task.Delay(millisecondDelay);
+                                }
+                                else
+                                {
+                                    record.Url = null;
+                                    record.DwellTime = Resources.ignoreTask;
+                                }
+
+                                record.Title = title;
+                                AddLogItem(record); //打印日志
+                                logListView.EnsureVisible(logListView.Items.Count - 1);
+                            }
+                            ++page;
+                        }
+
+                        record.Status = Resources.doneStatus;   //更改任务状态为已完成
+                        var item = taskListView.Items[record.Id - 1];
+                        item.SubItems[3] = new ListViewItem.ListViewSubItem(item, record.Status);   //更新界面
+                    }
+                } while (loopCheckBox.Checked);
+            }
+
+            Button_Enabled();
         }
 
         private void stopButton_Click(object sender, EventArgs e)
         {
-            //todo
+            Button_Enabled();
         }
 
-        private void cleanButton_Click(object sender, EventArgs e)
+        private void cleanTaskButton_Click(object sender, EventArgs e)
         {
             Global.Tasks.Clear();
             taskListView.Items.Clear();
+        }
+
+        private void cleanLogButton_Click(object sender, EventArgs e)
+        {
+            logListView.Items.Clear();
         }
         #endregion
     }

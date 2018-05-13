@@ -151,44 +151,47 @@
   <data name="groupBox3.Text" xml:space="preserve">
     <value>日志</value>
   </data>
+  <data name="kwContextMenuStrip.Size" type="System.Drawing.Size, System.Drawing">
+    <value>169, 148</value>
+  </data>
   <data name="newGroupToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>210, 24</value>
+    <value>168, 24</value>
   </data>
   <data name="newGroupToolStripMenuItem.Text" xml:space="preserve">
     <value>新建分组</value>
   </data>
   <data name="editToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>210, 24</value>
+    <value>168, 24</value>
   </data>
   <data name="editToolStripMenuItem.Text" xml:space="preserve">
     <value>管理关键词</value>
   </data>
   <data name="addToTaskToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>210, 24</value>
+    <value>168, 24</value>
   </data>
   <data name="addToTaskToolStripMenuItem.Text" xml:space="preserve">
     <value>添加到任务</value>
   </data>
   <data name="collapseAllToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>210, 24</value>
+    <value>168, 24</value>
   </data>
   <data name="collapseAllToolStripMenuItem.Text" xml:space="preserve">
     <value>折叠所有分组</value>
   </data>
   <data name="expandAllToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>210, 24</value>
+    <value>168, 24</value>
   </data>
   <data name="expandAllToolStripMenuItem.Text" xml:space="preserve">
     <value>展开所有分组</value>
   </data>
   <data name="deleteGroupToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>210, 24</value>
+    <value>168, 24</value>
   </data>
   <data name="deleteGroupToolStripMenuItem.Text" xml:space="preserve">
     <value>删除分组</value>
   </data>
-  <data name="kwContextMenuStrip.Size" type="System.Drawing.Size, System.Drawing">
-    <value>169, 148</value>
+  <data name="cleanLogButton.Text" xml:space="preserve">
+    <value>清空日志</value>
   </data>
   <data name="loopCheckBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>59, 19</value>
@@ -196,7 +199,7 @@
   <data name="loopCheckBox.Text" xml:space="preserve">
     <value>循环</value>
   </data>
-  <data name="cleanButton.Text" xml:space="preserve">
+  <data name="cleanTaskButton.Text" xml:space="preserve">
     <value>清空任务</value>
   </data>
   <data name="stopButton.Text" xml:space="preserve">
@@ -239,13 +242,17 @@
     <value>当前任务: </value>
   </data>
   <data name="toolStripStatusLabel4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>668, 20</value>
+    <value>759, 20</value>
   </data>
   <data name="toolStripStatusLabel3.Size" type="System.Drawing.Size, System.Drawing">
     <value>62, 20</value>
   </data>
   <data name="toolStripStatusLabel3.Text" xml:space="preserve">
     <value>点击量: </value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>Inherit</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>关键词助手</value>
