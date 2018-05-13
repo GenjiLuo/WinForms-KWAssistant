@@ -11,6 +11,7 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using NLog;
 
 namespace KWAssistant.Form
 {
@@ -18,9 +19,12 @@ namespace KWAssistant.Form
     {
         private bool _flag = false; //任务是否在执行
 
+        private readonly Logger _logger;
+
         public MainForm()
         {
             InitializeComponent();
+            _logger = LogManager.GetCurrentClassLogger();
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -302,7 +306,7 @@ namespace KWAssistant.Form
 
             const int millisecondDelay = 1000;
             var parser = new HtmlParser();
-            using (var client = new HttpClient())
+            using (var client = new HttpClient { Timeout = TimeSpan.FromMilliseconds(2000) })
             {
                 do
                 {
@@ -321,7 +325,18 @@ namespace KWAssistant.Form
                             taskListView.EnsureVisible(record.Id - 1);  //滚动条划到该行
 
                             var address = $"http://www.baidu.com/s?wd={record.Keyword}&pn={(page - 1) * 10}"; //搜索关键字+页数
-                            var res = await client.GetAsync(address);
+                            HttpResponseMessage res = null;
+                            try
+                            {
+                                res = await client.GetAsync(address);  //访问链接
+                            }
+                            catch (Exception ex)
+                            {
+                                _logger.Error(ex);
+                                MessageBox.Show(Resources.networkError, Resources.Tip, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                stopButton_Click(sender, e);    //停止任务
+                                return;
+                            };
                             var document = parser.Parse(await res.Content.ReadAsStringAsync());
                             var cells = document.QuerySelectorAll("h3.t a"); //取得搜索结果列表
                             foreach (var cell in cells)
@@ -342,7 +357,7 @@ namespace KWAssistant.Form
                                     }
                                     catch (Exception ex)
                                     {
-                                        Debug.WriteLine(ex.Message);
+                                        _logger.Error(ex);
                                     };
                                     var endTime = Environment.TickCount;
                                     record.Url = res.RequestMessage.RequestUri; //真实Uri

@@ -147,4 +147,7 @@
   <data name="ignoreTask" xml:space="preserve">
     <value>ignore</value>
   </data>
+  <data name="networkError" xml:space="preserve">
+    <value>network error!</value>
+  </data>
 </root>

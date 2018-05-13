@@ -115,6 +115,15 @@ namespace KWAssistant.Properties {
         }
         
         /// <summary>
+        ///   查找类似 network error! 的本地化字符串。
+        /// </summary>
+        internal static string networkError {
+            get {
+                return ResourceManager.GetString("networkError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Can not be null 的本地化字符串。
         /// </summary>
         internal static string nullTip {
