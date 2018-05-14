@@ -120,7 +120,7 @@
   <data name="deleteTip" xml:space="preserve">
     <value>Are you sure you want to delete?</value>
   </data>
-  <data name="Tip" xml:space="preserve">
+  <data name="tip" xml:space="preserve">
     <value>Tip</value>
   </data>
   <data name="existTip" xml:space="preserve">
@@ -141,7 +141,7 @@
   <data name="invalidTip" xml:space="preserve">
     <value>Invalid data</value>
   </data>
-  <data name="CannotAddTask" xml:space="preserve">
+  <data name="cannotAddTask" xml:space="preserve">
     <value>Task is running...</value>
   </data>
   <data name="ignoreTask" xml:space="preserve">

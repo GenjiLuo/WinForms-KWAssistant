@@ -30,11 +30,11 @@ namespace KWAssistant.Form
             var name = newGroupTextBox.Text.Trim();
             if (string.IsNullOrWhiteSpace(name))    //空名称
             {
-                MessageBox.Show(Resources.nullTip, Resources.Tip, MessageBoxButtons.OK);
+                MessageBox.Show(Resources.nullTip, Resources.tip, MessageBoxButtons.OK);
             }
             else if (Global.Groups.Any(s => s.Name == name))    //命名重复
             {
-                MessageBox.Show(Resources.existTip, Resources.Tip, MessageBoxButtons.OK);
+                MessageBox.Show(Resources.existTip, Resources.tip, MessageBoxButtons.OK);
             }
             else
             {

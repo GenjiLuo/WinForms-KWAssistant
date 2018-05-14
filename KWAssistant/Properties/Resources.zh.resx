@@ -120,7 +120,7 @@
   <data name="deleteTip" xml:space="preserve">
     <value>确认删除？</value>
   </data>
-  <data name="Tip" xml:space="preserve">
+  <data name="tip" xml:space="preserve">
     <value>提示</value>
   </data>
   <data name="existTip" xml:space="preserve">
@@ -141,7 +141,7 @@
   <data name="invalidTip" xml:space="preserve">
     <value>无效的数据</value>
   </data>
-  <data name="CannotAddTask" xml:space="preserve">
+  <data name="cannotAddTask" xml:space="preserve">
     <value>任务正在执行中...</value>
   </data>
   <data name="ignoreTask" xml:space="preserve">

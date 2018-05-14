@@ -253,7 +253,7 @@ namespace KWAssistant.Form
         {
             if (_flag)  //执行过程中不允许添加任务
             {
-                MessageBox.Show(Resources.CannotAddTask, Resources.Tip, MessageBoxButtons.OK);
+                MessageBox.Show(Resources.cannotAddTask, Resources.tip, MessageBoxButtons.OK);
                 return;
             }
             var selectNode = kwTreeView.SelectedNode;
@@ -274,7 +274,7 @@ namespace KWAssistant.Form
         private void deleteGroupToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var selectNode = kwTreeView.SelectedNode;
-            if (MessageBox.Show(Resources.deleteTip, Resources.Tip, MessageBoxButtons.YesNo) == DialogResult.Yes)
+            if (MessageBox.Show(Resources.deleteTip, Resources.tip, MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
                 Global.Groups.RemoveAt(selectNode.Index);
                 kwTreeView.Nodes.Remove(selectNode);
@@ -305,8 +305,9 @@ namespace KWAssistant.Form
             Button_Disabled();
 
             const int millisecondDelay = 1000;
+            const int timeout = 8000;
             var parser = new HtmlParser();
-            using (var client = new HttpClient { Timeout = TimeSpan.FromMilliseconds(2000) })
+            using (var client = new HttpClient { Timeout = TimeSpan.FromMilliseconds(timeout) })
             {
                 do
                 {
@@ -333,8 +334,8 @@ namespace KWAssistant.Form
                             catch (Exception ex)
                             {
                                 _logger.Error(ex);
-                                MessageBox.Show(Resources.networkError, Resources.Tip, MessageBoxButtons.OK, MessageBoxIcon.Error);
                                 stopButton_Click(sender, e);    //停止任务
+                                MessageBox.Show(Resources.networkError, Resources.tip, MessageBoxButtons.OK, MessageBoxIcon.Error);
                                 return;
                             };
                             var document = parser.Parse(await res.Content.ReadAsStringAsync());
@@ -357,7 +358,9 @@ namespace KWAssistant.Form
                                     }
                                     catch (Exception ex)
                                     {
-                                        _logger.Error(ex);
+                                        //超时不做记录
+                                        if (!(ex is TaskCanceledException) || Environment.TickCount - startTime < timeout)
+                                            _logger.Error(ex);
                                     };
                                     var endTime = Environment.TickCount;
                                     record.Url = res.RequestMessage.RequestUri; //真实Uri

@@ -25,7 +25,7 @@ namespace KWAssistant.Form
         {
             if (!IsValid())
             {
-                MessageBox.Show(Resources.invalidTip, Resources.Tip, MessageBoxButtons.OK);
+                MessageBox.Show(Resources.invalidTip, Resources.tip, MessageBoxButtons.OK);
             }
             else
             {

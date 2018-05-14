@@ -63,9 +63,9 @@ namespace KWAssistant.Properties {
         /// <summary>
         ///   查找类似 Task is running... 的本地化字符串。
         /// </summary>
-        internal static string CannotAddTask {
+        internal static string cannotAddTask {
             get {
-                return ResourceManager.GetString("CannotAddTask", resourceCulture);
+                return ResourceManager.GetString("cannotAddTask", resourceCulture);
             }
         }
         
@@ -144,9 +144,9 @@ namespace KWAssistant.Properties {
         /// <summary>
         ///   查找类似 Tip 的本地化字符串。
         /// </summary>
-        internal static string Tip {
+        internal static string tip {
             get {
-                return ResourceManager.GetString("Tip", resourceCulture);
+                return ResourceManager.GetString("tip", resourceCulture);
             }
         }
         

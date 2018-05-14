@@ -19,7 +19,7 @@ namespace KWAssistant.Form
             var keyword = newTaskTextBox.Text.Trim();
             if (string.IsNullOrWhiteSpace(keyword))
             {
-                MessageBox.Show(Resources.nullTip, Resources.Tip, MessageBoxButtons.OK);
+                MessageBox.Show(Resources.nullTip, Resources.tip, MessageBoxButtons.OK);
             }
             else
             {
