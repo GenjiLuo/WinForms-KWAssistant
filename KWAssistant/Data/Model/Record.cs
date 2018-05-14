@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace KWAssistant.Data.Model
+﻿namespace KWAssistant.Data.Model
 {
     public class Record
     {
@@ -12,7 +10,7 @@ namespace KWAssistant.Data.Model
 
         public string Title { get; set; }
 
-        public Uri Url { get; set; }
+        public string Url { get; set; }
 
         public string Status { get; set; }
 

@@ -138,7 +138,7 @@
     <value>4</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
-    <value>每行输入一个标题关键词。
+    <value>每行输入一个标题关键词或域名。
 任务执行时遇到符合黑名单规则的自动跳过。</value>
   </data>
   <data name="&gt;&gt;label1.Name" xml:space="preserve">

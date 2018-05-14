@@ -3,6 +3,7 @@ using KWAssistant.Data;
 using KWAssistant.Data.Model;
 using KWAssistant.Properties;
 using KWAssistant.Util;
+using NLog;
 using System;
 using System.Diagnostics;
 using System.Drawing;
@@ -11,7 +12,6 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using NLog;
 
 namespace KWAssistant.Form
 {
@@ -100,6 +100,7 @@ namespace KWAssistant.Form
             item.SubItems.Add(status);
             taskListView.Items.Add(item);
         }
+
         /// <summary>
         /// 打印日志
         /// </summary>
@@ -109,7 +110,7 @@ namespace KWAssistant.Form
             var item = new ListViewItem(record.Id.ToString());
             item.SubItems.Add(record.Keyword);
             item.SubItems.Add(record.Title);
-            item.SubItems.Add(record.Url?.ToString());
+            item.SubItems.Add(record.Url);
             item.SubItems.Add(record.DwellTime);
             item.SubItems.Add(record.Ip);
             if (record.DwellTime == Resources.ignoreTask) item.ForeColor = Color.Blue;
@@ -142,6 +143,19 @@ namespace KWAssistant.Form
             cleanTaskButton.Enabled = false;
             loopCheckBox.Enabled = false;
             _flag = true;
+        }
+
+        /// <summary>
+        /// 判断标题和域名是否符合黑白名单规则
+        /// </summary>
+        /// <param name="title">要检查的标题</param>
+        /// <param name="uri">要检查的uri</param>
+        /// <returns>符合则返回true</returns>
+        private bool IsLegal(string title, string uri)
+        {
+            return !Global.BlackList.Any()
+                   && !Global.WhiteList.Any(s => title.Contains(s) || uri.Contains(s))
+                   || Global.BlackList.Any(s => title.Contains(s) || uri.Contains(s));
         }
         #endregion
 
@@ -304,87 +318,93 @@ namespace KWAssistant.Form
         {
             Button_Disabled();
 
-            const int millisecondDelay = 1000;
-            const int timeout = 8000;
+            const int millisecondDelay = 2000;
+            const int timeout = 5000;
             var parser = new HtmlParser();
-            using (var client = new HttpClient { Timeout = TimeSpan.FromMilliseconds(timeout) })
+            using (var handler = new HttpClientHandler { AllowAutoRedirect = false })
             {
-                do
+                using (var client = new HttpClient(handler) { Timeout = TimeSpan.FromMilliseconds(timeout) })
                 {
-                    foreach (var record in Global.Tasks)
+                    do
                     {
-                        record.Status = Resources.toDoStatus;   //更改任务状态为等待中
-                        var item = taskListView.Items[record.Id - 1];
-                        item.SubItems[3] = new ListViewItem.ListViewSubItem(item, record.Status);   //更新界面
-                    }
-                    foreach (var record in Global.Tasks)
-                    {
-                        var page = Global.Setting.PageMin;
-                        while (page <= Global.Setting.PageMax)  //浏览页数
+                        foreach (var record in Global.Tasks)
                         {
-                            taskListView.Items[record.Id - 1].Selected = true;  //选中该任务所在的行，突出显示
-                            taskListView.EnsureVisible(record.Id - 1);  //滚动条划到该行
-
-                            var address = $"http://www.baidu.com/s?wd={record.Keyword}&pn={(page - 1) * 10}"; //搜索关键字+页数
-                            HttpResponseMessage res = null;
-                            try
-                            {
-                                res = await client.GetAsync(address);  //访问链接
-                            }
-                            catch (Exception ex)
-                            {
-                                _logger.Error(ex);
-                                stopButton_Click(sender, e);    //停止任务
-                                MessageBox.Show(Resources.networkError, Resources.tip, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                return;
-                            };
-                            var document = parser.Parse(await res.Content.ReadAsStringAsync());
-                            var cells = document.QuerySelectorAll("h3.t a"); //取得搜索结果列表
-                            foreach (var cell in cells)
-                            {
-                                if (!_flag) return;
-                                var title = cell.TextContent; //标题
-                                var link = cell.GetAttribute("href");   //链接
-
-                                if (!Global.BlackList.Any()
-                                    && !Global.WhiteList.Any(s => title.Contains(s))
-                                    || Global.BlackList.Any(s => title.Contains(s)))    //判断是否符合黑白名单规则
-                                {
-                                    Debug.WriteLine($"{title}, ThreadId: {Thread.CurrentThread.ManagedThreadId}, isPoolThread: {Thread.CurrentThread.IsThreadPoolThread}");
-                                    var startTime = Environment.TickCount;
-                                    try
-                                    {
-                                        res = await client.GetAsync(link);  //访问链接
-                                    }
-                                    catch (Exception ex)
-                                    {
-                                        //超时不做记录
-                                        if (!(ex is TaskCanceledException) || Environment.TickCount - startTime < timeout)
-                                            _logger.Error(ex);
-                                    };
-                                    var endTime = Environment.TickCount;
-                                    record.Url = res.RequestMessage.RequestUri; //真实Uri
-                                    record.DwellTime = $"{endTime - startTime} ms"; //耗时
-                                    await Task.Delay(millisecondDelay);
-                                }
-                                else
-                                {
-                                    record.Url = null;
-                                    record.DwellTime = Resources.ignoreTask;
-                                }
-
-                                record.Title = title;
-                                AddLogItem(record); //打印日志
-                                logListView.EnsureVisible(logListView.Items.Count - 1);
-                            }
-                            ++page;
+                            record.Status = Resources.toDoStatus; //更改任务状态为等待中
+                            var item = taskListView.Items[record.Id - 1];
+                            item.SubItems[3] = new ListViewItem.ListViewSubItem(item, record.Status); //更新界面
                         }
 
-                        record.Status = Resources.doneStatus;   //更改任务状态为已完成
-                        var item = taskListView.Items[record.Id - 1];
-                        item.SubItems[3] = new ListViewItem.ListViewSubItem(item, record.Status);   //更新界面
-                    }
-                } while (loopCheckBox.Checked);
+                        foreach (var record in Global.Tasks)
+                        {
+                            var page = Global.Setting.PageMin;
+                            while (page <= Global.Setting.PageMax) //浏览页数
+                            {
+                                taskListView.Items[record.Id - 1].Selected = true; //选中该任务所在的行，突出显示
+                                taskListView.EnsureVisible(record.Id - 1); //滚动条划到该行
+
+                                var address = $"http://www.baidu.com/s?wd={record.Keyword}&pn={(page - 1) * 10}"; //搜索关键字+页数
+                                HttpResponseMessage res;
+                                try
+                                {
+                                    res = await client.GetAsync(address); //访问链接
+                                }
+                                catch (Exception ex)
+                                {
+                                    _logger.Error(ex);
+                                    stopButton_Click(sender, e); //停止任务
+                                    MessageBox.Show(Resources.networkError, Resources.tip, MessageBoxButtons.OK,
+                                        MessageBoxIcon.Error);
+                                    return;
+                                }
+
+                                var document = parser.Parse(await res.Content.ReadAsStringAsync());
+                                var cells = document.QuerySelectorAll("#content_left div.c-container"); //取得搜索结果列表
+                                foreach (var cell in cells)
+                                {
+                                    if (!_flag) return;
+                                    var head = cell.QuerySelector("h3 a");
+                                    var title = head.TextContent; //标题
+                                    var link = head.GetAttribute("href"); //百度重定向地址
+                                    var partOfRealUri = cell.QuerySelector(".c-showurl")?.TextContent
+                                                        ?? cell.QuerySelector(".g").TextContent; //不完整的真实地址
+                                    record.Url = partOfRealUri;
+
+                                    if (IsLegal(title, partOfRealUri)) //判断标题和uri是否符合黑白名单规则
+                                    {
+                                        Debug.WriteLine(
+                                            $"{title}, ThreadId: {Thread.CurrentThread.ManagedThreadId}, isPoolThread: {Thread.CurrentThread.IsThreadPoolThread}");
+                                        var startTime = Environment.TickCount;
+                                        try
+                                        {
+                                            res = await client.GetAsync(link); //访问链接
+                                        }
+                                        catch (Exception ex)
+                                        {
+                                            _logger.Error(ex);
+                                        }
+                                        var endTime = Environment.TickCount;
+                                        record.Url = res.Headers.Location.ToString(); //完整的真实地址
+                                        record.DwellTime = $"{endTime - startTime} ms";
+                                        await Task.Delay(millisecondDelay);
+                                    }
+                                    else
+                                    {
+                                        record.DwellTime = Resources.ignoreTask;
+                                    }
+
+                                    record.Title = title;
+                                    AddLogItem(record); //打印日志
+                                    logListView.EnsureVisible(logListView.Items.Count - 1);
+                                }
+                                ++page;
+                            }
+
+                            record.Status = Resources.doneStatus; //更改任务状态为已完成
+                            var item = taskListView.Items[record.Id - 1];
+                            item.SubItems[3] = new ListViewItem.ListViewSubItem(item, record.Status); //更新界面
+                        }
+                    } while (loopCheckBox.Checked);
+                }
             }
 
             Button_Enabled();
