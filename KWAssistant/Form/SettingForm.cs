@@ -3,6 +3,7 @@ using KWAssistant.Data.Model;
 using KWAssistant.Properties;
 using KWAssistant.Util;
 using System;
+using System.Globalization;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -33,6 +34,8 @@ namespace KWAssistant.Form
                 {
                     PageMin = (int)pageMin.Value,
                     PageMax = (int)pageMax.Value,
+                    IntervalMin = (int)intervalMin.Value,
+                    IntervalMax = (int)intervalMax.Value,
                     SearchMin = (int)searchMin.Value,
                     SearchMax = (int)searchMax.Value,
                     ClickMin = (int)clickMin.Value,
@@ -52,6 +55,8 @@ namespace KWAssistant.Form
         {
             pageMin.Value = Global.Setting.PageMin;
             pageMax.Value = Global.Setting.PageMax;
+            intervalMin.Value = Global.Setting.IntervalMin;
+            intervalMax.Value = Global.Setting.IntervalMax;
             searchMin.Value = Global.Setting.SearchMin;
             searchMax.Value = Global.Setting.SearchMax;
             clickMin.Value = Global.Setting.ClickMin;
@@ -83,7 +88,7 @@ namespace KWAssistant.Form
             if (input?.Text == string.Empty)
             {
                 var num = sender as NumericUpDown;
-                input.Text = num?.Value + "";
+                input.Text = num?.Value.ToString(CultureInfo.InvariantCulture);
             }
         }
 
@@ -93,11 +98,10 @@ namespace KWAssistant.Form
         /// <returns></returns>
         private bool IsValid()
         {
-            if (pageMin.Value > pageMax.Value || searchMin.Value > searchMax.Value || clickMin.Value > clickMax.Value)
-            {
-                return false;
-            }
-            return true;
+            return pageMin.Value <= pageMax.Value
+                   && intervalMin.Value <= intervalMax.Value
+                   && searchMin.Value <= searchMax.Value
+                   && clickMin.Value <= clickMax.Value;
         }
     }
 }

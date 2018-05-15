@@ -16,6 +16,16 @@
         public int PageMax { get; set; } = 3;
 
         /// <summary>
+        /// 最小间隔时间
+        /// </summary>
+        public int IntervalMin { get; set; } = 1;
+
+        /// <summary>
+        /// 最大间隔时间
+        /// </summary>
+        public int IntervalMax { get; set; } = 3;
+
+        /// <summary>
         /// 最小搜索停留时间
         /// </summary>
         public int SearchMin { get; set; } = 1;

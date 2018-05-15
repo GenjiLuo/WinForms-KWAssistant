@@ -120,17 +120,13 @@
   <metadata name="label1.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>False</value>
   </metadata>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="label1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>None</value>
-  </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="label1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>20, 69</value>
+    <value>20, 74</value>
   </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 15</value>
@@ -157,19 +153,16 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
-    <value>16</value>
+    <value>20</value>
   </data>
   <metadata name="label2.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>False</value>
   </metadata>
-  <data name="label2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>None</value>
-  </data>
   <data name="label2.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>20, 120</value>
+    <value>20, 174</value>
   </data>
   <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
     <value>106, 15</value>
@@ -181,7 +174,7 @@
     <value>搜索停留(秒):</value>
   </data>
   <data name="label2.ToolTip" xml:space="preserve">
-    <value>每次搜索关键词后停顿的时间</value>
+    <value>搜索关键词后停顿的时间</value>
   </data>
   <data name="&gt;&gt;label2.Name" xml:space="preserve">
     <value>label2</value>
@@ -193,19 +186,16 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
-    <value>15</value>
+    <value>19</value>
   </data>
   <metadata name="label4.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>False</value>
   </metadata>
-  <data name="label4.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>None</value>
-  </data>
   <data name="label4.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="label4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>20, 171</value>
+    <value>20, 224</value>
   </data>
   <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
     <value>106, 15</value>
@@ -217,7 +207,7 @@
     <value>点击停留(秒):</value>
   </data>
   <data name="label4.ToolTip" xml:space="preserve">
-    <value>每次打开网页停留的时间</value>
+    <value>在目标网页停留的时间</value>
   </data>
   <data name="&gt;&gt;label4.Name" xml:space="preserve">
     <value>label4</value>
@@ -229,31 +219,30 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;label4.ZOrder" xml:space="preserve">
-    <value>14</value>
+    <value>18</value>
   </data>
   <metadata name="label5.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>False</value>
   </metadata>
-  <data name="label5.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>None</value>
-  </data>
   <data name="label5.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="label5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>20, 222</value>
+    <value>20, 272</value>
   </data>
   <data name="label5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>151, 15</value>
+    <value>106, 30</value>
   </data>
   <data name="label5.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
   <data name="label5.Text" xml:space="preserve">
-    <value>每个关键词耗时(分):</value>
+    <value>每个关键词
+最多耗时(分):</value>
   </data>
   <data name="label5.ToolTip" xml:space="preserve">
-    <value>每个关键词最多耗时，超过时间强制切换到下一个关键词</value>
+    <value>每个关键词最多能消耗的时间，
+超过时间强制切换到下一个关键词</value>
   </data>
   <data name="&gt;&gt;label5.Name" xml:space="preserve">
     <value>label5</value>
@@ -265,19 +254,16 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;label5.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>17</value>
   </data>
   <metadata name="label6.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>False</value>
   </metadata>
-  <data name="label6.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>None</value>
-  </data>
   <data name="label6.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="label6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>281, 69</value>
+    <value>282, 74</value>
   </data>
   <data name="label6.Size" type="System.Drawing.Size, System.Drawing">
     <value>23, 15</value>
@@ -298,19 +284,16 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;label6.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>14</value>
   </data>
   <metadata name="label7.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>False</value>
   </metadata>
-  <data name="label7.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>None</value>
-  </data>
   <data name="label7.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="label7.Location" type="System.Drawing.Point, System.Drawing">
-    <value>281, 120</value>
+    <value>282, 174</value>
   </data>
   <data name="label7.Size" type="System.Drawing.Size, System.Drawing">
     <value>23, 15</value>
@@ -331,19 +314,16 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;label7.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>11</value>
   </data>
   <metadata name="label9.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>False</value>
   </metadata>
-  <data name="label9.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>None</value>
-  </data>
   <data name="label9.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="label9.Location" type="System.Drawing.Point, System.Drawing">
-    <value>281, 171</value>
+    <value>282, 224</value>
   </data>
   <data name="label9.Size" type="System.Drawing.Size, System.Drawing">
     <value>23, 15</value>
@@ -364,14 +344,11 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;label9.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>8</value>
   </data>
   <metadata name="label3.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>False</value>
   </metadata>
-  <data name="label3.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>None</value>
-  </data>
   <data name="label3.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -397,13 +374,80 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;label3.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>5</value>
   </data>
-  <data name="pageMin.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>None</value>
+  <metadata name="label8.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>False</value>
+  </metadata>
+  <data name="label8.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="label8.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label8.Location" type="System.Drawing.Point, System.Drawing">
+    <value>282, 124</value>
+  </data>
+  <data name="label8.Size" type="System.Drawing.Size, System.Drawing">
+    <value>23, 15</value>
+  </data>
+  <data name="label8.TabIndex" type="System.Int32, mscorlib">
+    <value>26</value>
+  </data>
+  <data name="label8.Text" xml:space="preserve">
+    <value>-&gt;</value>
+  </data>
+  <data name="&gt;&gt;label8.Name" xml:space="preserve">
+    <value>label8</value>
+  </data>
+  <data name="&gt;&gt;label8.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label8.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;label8.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <metadata name="label10.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>False</value>
+  </metadata>
+  <data name="label10.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label10.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label10.Location" type="System.Drawing.Point, System.Drawing">
+    <value>20, 124</value>
+  </data>
+  <data name="label10.Size" type="System.Drawing.Size, System.Drawing">
+    <value>106, 15</value>
+  </data>
+  <data name="label10.TabIndex" type="System.Int32, mscorlib">
+    <value>23</value>
+  </data>
+  <data name="label10.Text" xml:space="preserve">
+    <value>间隔时间(秒):</value>
+  </data>
+  <data name="label10.ToolTip" xml:space="preserve">
+    <value>搜索关键字或翻页的时间间隔</value>
+  </data>
+  <data name="&gt;&gt;label10.Name" xml:space="preserve">
+    <value>label10</value>
+  </data>
+  <data name="&gt;&gt;label10.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label10.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;label10.ZOrder" xml:space="preserve">
+    <value>3</value>
   </data>
   <data name="pageMin.Location" type="System.Drawing.Point, System.Drawing">
-    <value>179, 67</value>
+    <value>180, 72</value>
   </data>
   <data name="pageMin.Size" type="System.Drawing.Size, System.Drawing">
     <value>81, 25</value>
@@ -421,13 +465,10 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;pageMin.ZOrder" xml:space="preserve">
-    <value>12</value>
-  </data>
-  <data name="pageMax.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>None</value>
+    <value>16</value>
   </data>
   <data name="pageMax.Location" type="System.Drawing.Point, System.Drawing">
-    <value>324, 67</value>
+    <value>325, 72</value>
   </data>
   <data name="pageMax.Size" type="System.Drawing.Size, System.Drawing">
     <value>81, 25</value>
@@ -445,13 +486,10 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;pageMax.ZOrder" xml:space="preserve">
-    <value>11</value>
-  </data>
-  <data name="searchMax.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>None</value>
+    <value>15</value>
   </data>
   <data name="searchMax.Location" type="System.Drawing.Point, System.Drawing">
-    <value>324, 118</value>
+    <value>325, 172</value>
   </data>
   <data name="searchMax.Size" type="System.Drawing.Size, System.Drawing">
     <value>81, 25</value>
@@ -469,13 +507,10 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;searchMax.ZOrder" xml:space="preserve">
-    <value>8</value>
-  </data>
-  <data name="searchMin.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>None</value>
+    <value>12</value>
   </data>
   <data name="searchMin.Location" type="System.Drawing.Point, System.Drawing">
-    <value>179, 118</value>
+    <value>180, 172</value>
   </data>
   <data name="searchMin.Size" type="System.Drawing.Size, System.Drawing">
     <value>81, 25</value>
@@ -493,13 +528,10 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;searchMin.ZOrder" xml:space="preserve">
-    <value>9</value>
-  </data>
-  <data name="clickMax.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>None</value>
+    <value>13</value>
   </data>
   <data name="clickMax.Location" type="System.Drawing.Point, System.Drawing">
-    <value>324, 169</value>
+    <value>325, 222</value>
   </data>
   <data name="clickMax.Size" type="System.Drawing.Size, System.Drawing">
     <value>81, 25</value>
@@ -517,13 +549,10 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;clickMax.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="clickMin.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>None</value>
+    <value>9</value>
   </data>
   <data name="clickMin.Location" type="System.Drawing.Point, System.Drawing">
-    <value>179, 169</value>
+    <value>180, 222</value>
   </data>
   <data name="clickMin.Size" type="System.Drawing.Size, System.Drawing">
     <value>81, 25</value>
@@ -541,13 +570,10 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;clickMin.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="timeSpent.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>None</value>
+    <value>10</value>
   </data>
   <data name="timeSpent.Location" type="System.Drawing.Point, System.Drawing">
-    <value>179, 220</value>
+    <value>180, 272</value>
   </data>
   <data name="timeSpent.Size" type="System.Drawing.Size, System.Drawing">
     <value>81, 25</value>
@@ -565,13 +591,10 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;timeSpent.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="saveButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>None</value>
+    <value>7</value>
   </data>
   <data name="saveButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>318, 266</value>
+    <value>318, 328</value>
   </data>
   <data name="saveButton.Size" type="System.Drawing.Size, System.Drawing">
     <value>87, 38</value>
@@ -592,16 +615,13 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;saveButton.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="cancelButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>None</value>
+    <value>6</value>
   </data>
   <data name="cancelButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="cancelButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>225, 266</value>
+    <value>225, 328</value>
   </data>
   <data name="cancelButton.Size" type="System.Drawing.Size, System.Drawing">
     <value>87, 38</value>
@@ -622,7 +642,49 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cancelButton.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>4</value>
+  </data>
+  <data name="intervalMax.Location" type="System.Drawing.Point, System.Drawing">
+    <value>325, 122</value>
+  </data>
+  <data name="intervalMax.Size" type="System.Drawing.Size, System.Drawing">
+    <value>81, 25</value>
+  </data>
+  <data name="intervalMax.TabIndex" type="System.Int32, mscorlib">
+    <value>25</value>
+  </data>
+  <data name="&gt;&gt;intervalMax.Name" xml:space="preserve">
+    <value>intervalMax</value>
+  </data>
+  <data name="&gt;&gt;intervalMax.Type" xml:space="preserve">
+    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;intervalMax.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;intervalMax.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="intervalMin.Location" type="System.Drawing.Point, System.Drawing">
+    <value>180, 122</value>
+  </data>
+  <data name="intervalMin.Size" type="System.Drawing.Size, System.Drawing">
+    <value>81, 25</value>
+  </data>
+  <data name="intervalMin.TabIndex" type="System.Int32, mscorlib">
+    <value>24</value>
+  </data>
+  <data name="&gt;&gt;intervalMin.Name" xml:space="preserve">
+    <value>intervalMin</value>
+  </data>
+  <data name="&gt;&gt;intervalMin.Type" xml:space="preserve">
+    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;intervalMin.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;intervalMin.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -631,7 +693,7 @@
     <value>120, 120</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>431, 317</value>
+    <value>433, 378</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Setting</value>

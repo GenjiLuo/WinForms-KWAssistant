@@ -38,6 +38,8 @@
             System.Windows.Forms.Label label7;
             System.Windows.Forms.Label label9;
             System.Windows.Forms.Label label3;
+            System.Windows.Forms.Label label8;
+            System.Windows.Forms.Label label10;
             this.pageMin = new System.Windows.Forms.NumericUpDown();
             this.pageMax = new System.Windows.Forms.NumericUpDown();
             this.searchMax = new System.Windows.Forms.NumericUpDown();
@@ -48,6 +50,8 @@
             this.saveButton = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.cancelButton = new System.Windows.Forms.Button();
+            this.intervalMax = new System.Windows.Forms.NumericUpDown();
+            this.intervalMin = new System.Windows.Forms.NumericUpDown();
             label1 = new System.Windows.Forms.Label();
             label2 = new System.Windows.Forms.Label();
             label4 = new System.Windows.Forms.Label();
@@ -56,6 +60,8 @@
             label7 = new System.Windows.Forms.Label();
             label9 = new System.Windows.Forms.Label();
             label3 = new System.Windows.Forms.Label();
+            label8 = new System.Windows.Forms.Label();
+            label10 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pageMin)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pageMax)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.searchMax)).BeginInit();
@@ -63,29 +69,35 @@
             ((System.ComponentModel.ISupportInitialize)(this.clickMax)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.clickMin)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.timeSpent)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.intervalMax)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.intervalMin)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
             // 
             resources.ApplyResources(label1, "label1");
+            label1.Cursor = System.Windows.Forms.Cursors.Help;
             label1.Name = "label1";
             this.toolTip1.SetToolTip(label1, resources.GetString("label1.ToolTip"));
             // 
             // label2
             // 
             resources.ApplyResources(label2, "label2");
+            label2.Cursor = System.Windows.Forms.Cursors.Help;
             label2.Name = "label2";
             this.toolTip1.SetToolTip(label2, resources.GetString("label2.ToolTip"));
             // 
             // label4
             // 
             resources.ApplyResources(label4, "label4");
+            label4.Cursor = System.Windows.Forms.Cursors.Help;
             label4.Name = "label4";
             this.toolTip1.SetToolTip(label4, resources.GetString("label4.ToolTip"));
             // 
             // label5
             // 
             resources.ApplyResources(label5, "label5");
+            label5.Cursor = System.Windows.Forms.Cursors.Help;
             label5.Name = "label5";
             this.toolTip1.SetToolTip(label5, resources.GetString("label5.ToolTip"));
             // 
@@ -108,6 +120,18 @@
             // 
             resources.ApplyResources(label3, "label3");
             label3.Name = "label3";
+            // 
+            // label8
+            // 
+            resources.ApplyResources(label8, "label8");
+            label8.Name = "label8";
+            // 
+            // label10
+            // 
+            resources.ApplyResources(label10, "label10");
+            label10.Cursor = System.Windows.Forms.Cursors.Help;
+            label10.Name = "label10";
+            this.toolTip1.SetToolTip(label10, resources.GetString("label10.ToolTip"));
             // 
             // pageMin
             // 
@@ -257,10 +281,58 @@
             this.cancelButton.UseVisualStyleBackColor = true;
             this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
             // 
+            // intervalMax
+            // 
+            resources.ApplyResources(this.intervalMax, "intervalMax");
+            this.intervalMax.Maximum = new decimal(new int[] {
+            100000,
+            0,
+            0,
+            0});
+            this.intervalMax.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.intervalMax.Name = "intervalMax";
+            this.intervalMax.Value = new decimal(new int[] {
+            3,
+            0,
+            0,
+            0});
+            this.intervalMax.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numericUpDown_KeyPress);
+            this.intervalMax.Leave += new System.EventHandler(this.numericUpDown_Leave);
+            // 
+            // intervalMin
+            // 
+            resources.ApplyResources(this.intervalMin, "intervalMin");
+            this.intervalMin.Maximum = new decimal(new int[] {
+            100000,
+            0,
+            0,
+            0});
+            this.intervalMin.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.intervalMin.Name = "intervalMin";
+            this.intervalMin.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.intervalMin.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numericUpDown_KeyPress);
+            this.intervalMin.Leave += new System.EventHandler(this.numericUpDown_Leave);
+            // 
             // SettingForm
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
+            this.Controls.Add(label8);
+            this.Controls.Add(this.intervalMax);
+            this.Controls.Add(this.intervalMin);
+            this.Controls.Add(label10);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(label3);
             this.Controls.Add(this.saveButton);
@@ -278,7 +350,7 @@
             this.Controls.Add(label4);
             this.Controls.Add(label2);
             this.Controls.Add(label1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "SettingForm";
@@ -289,6 +361,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.clickMax)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.clickMin)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.timeSpent)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.intervalMax)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.intervalMin)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -306,5 +380,7 @@
         private System.Windows.Forms.Button saveButton;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.Button cancelButton;
+        private System.Windows.Forms.NumericUpDown intervalMax;
+        private System.Windows.Forms.NumericUpDown intervalMin;
     }
 }

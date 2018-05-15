@@ -332,6 +332,7 @@ namespace KWAssistant.Form
                     {
                         foreach (var record in Global.Tasks)
                         {
+                            if (record.Status == Resources.toDoStatus) break;
                             record.Status = Resources.toDoStatus; //更改任务状态为等待中
                             var item = taskListView.Items[record.Id - 1];
                             item.SubItems[3] = new ListViewItem.ListViewSubItem(item, record.Status); //更新界面
