@@ -127,6 +127,7 @@ namespace KWAssistant.Form
             quickModeButton.Enabled = true;
             stopButton.Enabled = false;
             cleanTaskButton.Enabled = true;
+            cleanLogButton.Enabled = true;
             loopCheckBox.Enabled = true;
             _flag = false;
         }
@@ -141,7 +142,8 @@ namespace KWAssistant.Form
             quickModeButton.Enabled = false;
             stopButton.Enabled = true;
             cleanTaskButton.Enabled = false;
-            loopCheckBox.Enabled = false;
+            cleanLogButton.Enabled = true;
+            loopCheckBox.Enabled = true;
             _flag = true;
         }
 
@@ -319,12 +321,13 @@ namespace KWAssistant.Form
             Button_Disabled();
 
             const int millisecondDelay = 2000;
-            const int timeout = 5000;
+            const int timeout = 8000;
             var parser = new HtmlParser();
-            using (var handler = new HttpClientHandler { AllowAutoRedirect = false })
+            using (var handler = new HttpClientHandler { AllowAutoRedirect = true })
             {
                 using (var client = new HttpClient(handler) { Timeout = TimeSpan.FromMilliseconds(timeout) })
                 {
+                    client.CreateHeaders(); //添加常见的请求头
                     do
                     {
                         foreach (var record in Global.Tasks)
@@ -357,6 +360,7 @@ namespace KWAssistant.Form
                                     return;
                                 }
 
+                                client.SetReferer(res.RequestMessage.RequestUri);   //设置Referer
                                 var document = parser.Parse(await res.Content.ReadAsStringAsync());
                                 var cells = document.QuerySelectorAll("#content_left div.c-container"); //取得搜索结果列表
                                 foreach (var cell in cells)
@@ -383,7 +387,8 @@ namespace KWAssistant.Form
                                             _logger.Error(ex);
                                         }
                                         var endTime = Environment.TickCount;
-                                        record.Url = res.Headers.Location.ToString(); //完整的真实地址
+                                        //record.Url = res.Headers.Location.ToString();
+                                        record.Url = res.RequestMessage.RequestUri.ToString();  //完整的真实地址
                                         record.DwellTime = $"{endTime - startTime} ms";
                                         await Task.Delay(millisecondDelay);
                                     }
@@ -396,6 +401,8 @@ namespace KWAssistant.Form
                                     AddLogItem(record); //打印日志
                                     logListView.EnsureVisible(logListView.Items.Count - 1);
                                 }
+
+                                client.ClearReferer();  //清除Referer
                                 ++page;
                             }
 
