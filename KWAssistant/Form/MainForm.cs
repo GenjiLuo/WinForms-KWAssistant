@@ -323,7 +323,7 @@ namespace KWAssistant.Form
             const int millisecondDelay = 2000;
             const int timeout = 8000;
             var parser = new HtmlParser();
-            using (var handler = new HttpClientHandler { AllowAutoRedirect = true })
+            using (var handler = new HttpClientHandler { AllowAutoRedirect = false })
             {
                 using (var client = new HttpClient(handler) { Timeout = TimeSpan.FromMilliseconds(timeout) })
                 {
@@ -346,7 +346,7 @@ namespace KWAssistant.Form
                                 taskListView.Items[record.Id - 1].Selected = true; //选中该任务所在的行，突出显示
                                 taskListView.EnsureVisible(record.Id - 1); //滚动条划到该行
 
-                                var address = $"http://www.baidu.com/s?wd={record.Keyword}&pn={(page - 1) * 10}"; //搜索关键字+页数
+                                var address = new Uri($"http://www.baidu.com/s?wd={record.Keyword}&pn={(page - 1) * 10}"); //搜索关键字+页数
                                 HttpResponseMessage res;
                                 try
                                 {
@@ -361,7 +361,6 @@ namespace KWAssistant.Form
                                     return;
                                 }
 
-                                client.SetReferer(res.RequestMessage.RequestUri);   //设置Referer
                                 var document = parser.Parse(await res.Content.ReadAsStringAsync());
                                 var cells = document.QuerySelectorAll("#content_left div.c-container"); //取得搜索结果列表
                                 foreach (var cell in cells)
@@ -369,10 +368,9 @@ namespace KWAssistant.Form
                                     if (!_flag) return;
                                     var head = cell.QuerySelector("h3 a");
                                     var title = head.TextContent; //标题
-                                    var link = head.GetAttribute("href"); //百度重定向地址
+                                    var link = head.GetAttribute("href"); //百度重定向地址，link?url=
                                     var partOfRealUri = cell.QuerySelector(".c-showurl")?.TextContent
                                                         ?? cell.QuerySelector(".g").TextContent; //不完整的真实地址
-                                    record.Url = partOfRealUri;
 
                                     if (IsLegal(title, partOfRealUri)) //判断标题和uri是否符合黑白名单规则
                                     {
@@ -381,20 +379,23 @@ namespace KWAssistant.Form
                                         var startTime = Environment.TickCount;
                                         try
                                         {
-                                            res = await client.GetAsync(link); //访问链接
+                                            client.SetReferer(address);   //设置Referer，/s?wd=
+                                            res = await client.GetAsync(link); //访问link?url=
+                                            client.SetReferer(res.RequestMessage.RequestUri);   //设置Referer，link?url=
+                                            res = await client.GetAsync(res.Headers.Location);  //访问真实地址
                                         }
                                         catch (Exception ex)
                                         {
                                             _logger.Error(ex);
                                         }
                                         var endTime = Environment.TickCount;
-                                        //record.Url = res.Headers.Location.ToString();
                                         record.Url = res.RequestMessage.RequestUri.ToString();  //完整的真实地址
                                         record.DwellTime = $"{endTime - startTime} ms";
                                         await Task.Delay(millisecondDelay);
                                     }
                                     else
                                     {
+                                        record.Url = partOfRealUri;
                                         record.DwellTime = Resources.ignoreTask;
                                     }
 
