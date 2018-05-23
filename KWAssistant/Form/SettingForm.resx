@@ -432,7 +432,8 @@
     <value>间隔时间(秒):</value>
   </data>
   <data name="label10.ToolTip" xml:space="preserve">
-    <value>搜索关键字或翻页的时间间隔</value>
+    <value>当前关键词任务已执行完成，
+开始执行下一个关键词之前的间隔时间</value>
   </data>
   <data name="&gt;&gt;label10.Name" xml:space="preserve">
     <value>label10</value>

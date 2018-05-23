@@ -117,43 +117,4 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="deleteTip" xml:space="preserve">
-    <value>Are you sure you want to delete?</value>
-  </data>
-  <data name="tip" xml:space="preserve">
-    <value>Tip</value>
-  </data>
-  <data name="existTip" xml:space="preserve">
-    <value>Group name is already exist</value>
-  </data>
-  <data name="nullTip" xml:space="preserve">
-    <value>Can not be null</value>
-  </data>
-  <data name="doneStatus" xml:space="preserve">
-    <value>Done</value>
-  </data>
-  <data name="toDoStatus" xml:space="preserve">
-    <value>waiting...</value>
-  </data>
-  <data name="readKwError" xml:space="preserve">
-    <value>Failed to read keyword list!</value>
-  </data>
-  <data name="invalidTip" xml:space="preserve">
-    <value>Invalid data</value>
-  </data>
-  <data name="cannotAddTask" xml:space="preserve">
-    <value>Task is running...</value>
-  </data>
-  <data name="ignoreTask" xml:space="preserve">
-    <value>ignore</value>
-  </data>
-  <data name="networkError" xml:space="preserve">
-    <value>network error!</value>
-  </data>
-  <data name="loadError" xml:space="preserve">
-    <value>Load Error!</value>
-  </data>
-  <data name="timeoutTip" xml:space="preserve">
-    <value>超时</value>
-  </data>
 </root>

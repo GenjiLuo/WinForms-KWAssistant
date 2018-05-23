@@ -115,6 +115,15 @@ namespace KWAssistant.Properties {
         }
         
         /// <summary>
+        ///   查找类似 Load Error! 的本地化字符串。
+        /// </summary>
+        internal static string loadError {
+            get {
+                return ResourceManager.GetString("loadError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 network error! 的本地化字符串。
         /// </summary>
         internal static string networkError {
@@ -138,6 +147,15 @@ namespace KWAssistant.Properties {
         internal static string readKwError {
             get {
                 return ResourceManager.GetString("readKwError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 超时 的本地化字符串。
+        /// </summary>
+        internal static string timeoutTip {
+            get {
+                return ResourceManager.GetString("timeoutTip", resourceCulture);
             }
         }
         

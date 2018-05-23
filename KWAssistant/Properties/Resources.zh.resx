@@ -150,4 +150,10 @@
   <data name="networkError" xml:space="preserve">
     <value>网络错误！</value>
   </data>
+  <data name="loadError" xml:space="preserve">
+    <value>加载错误</value>
+  </data>
+  <data name="timeoutTip" xml:space="preserve">
+    <value>超时</value>
+  </data>
 </root>
