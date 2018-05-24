@@ -1,6 +1,6 @@
 ﻿using KWAssistant.Data.Model;
-using KWAssistant.Util;
 using System.Collections.Generic;
+using KWAssistant.Helper;
 
 namespace KWAssistant.Data
 {
@@ -19,11 +19,11 @@ namespace KWAssistant.Data
         static Global()
         {
             //从磁盘文件中读取数据
-            Groups = FileUtil.LoadKeywords(Config.KeywordFilePath);
+            Groups = FileHelper.LoadKeywords(Config.KeywordFilePath);
             Tasks = new List<Record>();
-            WhiteList = FileUtil.LoadList(Config.WhiteListFilePath);
-            BlackList = FileUtil.LoadList(Config.BlackListFilePath);
-            Setting = FileUtil.LoadSetting(Config.SettingFilePath);
+            WhiteList = FileHelper.LoadList(Config.WhiteListFilePath);
+            BlackList = FileHelper.LoadList(Config.BlackListFilePath);
+            Setting = FileHelper.LoadSetting(Config.SettingFilePath);
         }
     }
 }

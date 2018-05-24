@@ -1,7 +1,6 @@
 ﻿using KWAssistant.Data;
 using KWAssistant.Data.Model;
 using KWAssistant.Properties;
-using KWAssistant.Util;
 using NLog;
 using System;
 using System.Diagnostics;
@@ -11,6 +10,7 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using KWAssistant.Helper;
 
 namespace KWAssistant.Form
 {
@@ -312,8 +312,9 @@ namespace KWAssistant.Form
                     await browser.ExecuteJsAsync(code, cts);    //搜索关键词
 
                     var target = Global.Setting.PageMin;
-                    await browser.PageTurn(target, cts);    //跳到目标起始页
-                    await Task.Delay(_random.Next(Global.Setting.SearchMin, Global.Setting.SearchMax) * 1000, cts);  //搜索停留
+                    var delay = _random.Next(Global.Setting.SearchMin, Global.Setting.SearchMax) * 1000;
+                    await browser.PageTurn(target, cts, delay);    //跳到目标起始页
+                    await Task.Delay(delay, cts);  //搜索停留
 
                     while (target <= Global.Setting.PageMax)
                     {
@@ -347,7 +348,7 @@ namespace KWAssistant.Form
                         }
                         if (target != Global.Setting.PageMax)
                         {
-                            await browser.NextPage(cts);
+                            await browser.NextPage(cts, delay); //翻页并停留一段时间
                         }
 
                         ++target;
@@ -427,7 +428,7 @@ namespace KWAssistant.Form
             {
                 Global.Groups.Add(new Group { Name = name });
                 //持久化
-                new Task(() => { FileUtil.SaveKeywords(Config.KeywordFilePath, Global.Groups); }).Start();
+                new Task(() => { FileHelper.SaveKeywords(Config.KeywordFilePath, Global.Groups); }).Start();
                 //更新视图
                 kwTreeView.Nodes.Add(name);
             };
@@ -454,7 +455,7 @@ namespace KWAssistant.Form
                 var index = Global.Groups.FindIndex(g => g.Name == newGroup.Name);
                 Global.Groups[index] = newGroup;
                 //持久化
-                new Task(() => { FileUtil.SaveKeywords(Config.KeywordFilePath, Global.Groups); }).Start();
+                new Task(() => { FileHelper.SaveKeywords(Config.KeywordFilePath, Global.Groups); }).Start();
                 //更新视图数据
                 var nodes = kwTreeView.Nodes[index].Nodes;
                 nodes.Clear();
@@ -495,7 +496,7 @@ namespace KWAssistant.Form
             {
                 Global.Groups.RemoveAt(selectNode.Index);
                 kwTreeView.Nodes.Remove(selectNode);
-                new Task(() => { FileUtil.SaveKeywords(Config.KeywordFilePath, Global.Groups); }).Start();
+                new Task(() => { FileHelper.SaveKeywords(Config.KeywordFilePath, Global.Groups); }).Start();
             }
         }
         #endregion

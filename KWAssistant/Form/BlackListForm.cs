@@ -1,8 +1,8 @@
 ﻿using KWAssistant.Data;
 using KWAssistant.Data.Model;
-using KWAssistant.Util;
 using System;
 using System.Threading.Tasks;
+using KWAssistant.Helper;
 
 namespace KWAssistant.Form
 {
@@ -37,7 +37,7 @@ namespace KWAssistant.Form
             var words = blackListTextBox.Text.Split(new[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
             Global.BlackList.Clear();
             Global.BlackList.AddRange(words);
-            new Task(() => { FileUtil.SaveList(Config.BlackListFilePath, Global.BlackList); }).Start();
+            new Task(() => { FileHelper.SaveList(Config.BlackListFilePath, Global.BlackList); }).Start();
             Close();
         }
     }

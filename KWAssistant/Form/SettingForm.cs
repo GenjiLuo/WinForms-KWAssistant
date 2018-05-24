@@ -1,11 +1,11 @@
 ﻿using KWAssistant.Data;
 using KWAssistant.Data.Model;
 using KWAssistant.Properties;
-using KWAssistant.Util;
 using System;
 using System.Globalization;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using KWAssistant.Helper;
 
 namespace KWAssistant.Form
 {
@@ -43,7 +43,7 @@ namespace KWAssistant.Form
                     TimeSpent = (int)timeSpent.Value
                 };
                 Global.Setting = newSetting;
-                new Task(() => { FileUtil.SaveSetting(Config.SettingFilePath, newSetting); }).Start();
+                new Task(() => { FileHelper.SaveSetting(Config.SettingFilePath, newSetting); }).Start();
                 Close();
             }
         }

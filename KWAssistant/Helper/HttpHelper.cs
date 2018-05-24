@@ -1,17 +1,17 @@
-﻿using AngleSharp.Parser.Html;
-using KWAssistant.Data.Model;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using AngleSharp.Parser.Html;
+using KWAssistant.Data.Model;
 
-namespace KWAssistant.Util
+namespace KWAssistant.Helper
 {
-    static class HttpUtil
+    static class HttpHelper
     {
         private static readonly HtmlParser Parser;
 
-        static HttpUtil()
+        static HttpHelper()
         {
             Parser = new HtmlParser();
         }

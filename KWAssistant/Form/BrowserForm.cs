@@ -1,16 +1,18 @@
 ﻿using CefSharp;
 using CefSharp.WinForms;
-using KWAssistant.Util;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using KWAssistant.Handler;
 
 namespace KWAssistant.Form
 {
     public partial class BrowserForm : System.Windows.Forms.Form
     {
         private readonly ChromiumWebBrowser _webBrowser;
+
+        private bool _isReady = false;  //首次加载完毕
 
         private bool _hasError = false; //网页加载是否出错
 
@@ -31,11 +33,8 @@ namespace KWAssistant.Form
                 BrowserSettings = { DefaultEncoding = "UTF-8" },
                 LifeSpanHandler = new LifeSpanHandler()
             };
-            _webBrowser.LoadError += (sender, e) =>
-            {
-                _errorText = e.ErrorText;
-                _hasError = true;
-            };
+            _webBrowser.FrameLoadEnd += _webBrowser_FrameLoadEnd;
+            _webBrowser.LoadError += _webBrowser_LoadError;
 
             Controls.Add(_webBrowser);
             if (!isPopup && !visible)
@@ -48,6 +47,29 @@ namespace KWAssistant.Form
             Size = new System.Drawing.Size(800, 600);
             FormBorderStyle = FormBorderStyle.Sizable;
             ResumeLayout();
+        }
+
+        private void BrowserForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            _webBrowser.FrameLoadEnd -= _webBrowser_FrameLoadEnd;
+            _webBrowser.LoadError -= _webBrowser_LoadError;
+            foreach (var popup in OwnedForms)
+            {
+                popup.Dispose();
+                popup.Close();
+            }
+            _webBrowser.Dispose();
+        }
+
+        private void _webBrowser_LoadError(object sender, LoadErrorEventArgs e)
+        {
+            _errorText = e.ErrorText;
+            _hasError = true;
+        }
+
+        private void _webBrowser_FrameLoadEnd(object sender, FrameLoadEndEventArgs e)
+        {
+            if (e.Frame.IsMain) _isReady = true;
         }
 
         /// <summary>
@@ -70,7 +92,7 @@ namespace KWAssistant.Form
             _webBrowser.Load(url);
             await Task.Run(async () =>
             {
-                while (_webBrowser.GetBrowser().IsLoading)
+                while (!_isReady)
                 {
                     if (!_hasError) continue;
                     _hasError = false;
@@ -84,20 +106,13 @@ namespace KWAssistant.Form
         /// </summary>
         /// <param name="code"></param>
         /// <param name="cts"></param>
-        /// <returns></returns>
-        public async Task<JavascriptResponse> ExecuteJsAsync(string code, CancellationToken cts)
+        /// <param name="millisecondDelay">需要等待资源加载，延迟执行时间</param>
+        /// <returns>执行结果</returns>
+        public async Task<JavascriptResponse> ExecuteJsAsync(string code, CancellationToken cts, int millisecondDelay = 0)
         {
+            if (millisecondDelay != 0) await Task.Delay(millisecondDelay, cts);
             var res = await _webBrowser.GetBrowser().MainFrame.EvaluateScriptAsync(code);
-            return await Task.Run(async () =>
-            {
-                while (_webBrowser.GetBrowser().IsLoading)
-                {
-                    if (!_hasError) continue;
-                    _hasError = false;
-                    throw new Exception(_errorText);
-                }
-                return res;
-            }, cts);
+            return res;
         }
 
         /// <summary>
@@ -105,8 +120,9 @@ namespace KWAssistant.Form
         /// </summary>
         /// <param name="target">目标页</param>
         /// <param name="cts"></param>
+        /// <param name="millisecondDelay"></param>
         /// <returns></returns>
-        public async Task PageTurn(int target, CancellationToken cts)
+        public async Task PageTurn(int target, CancellationToken cts, int millisecondDelay = 0)
         {
             var code = @"var myPages = document.querySelectorAll('#page a');";
             var jump = 0;
@@ -115,7 +131,7 @@ namespace KWAssistant.Form
                 if (target <= 10)
                 {
                     code += $@"myPages[{target - 2}].click();";
-                    await ExecuteJsAsync(code, cts);
+                    await ExecuteJsAsync(code, cts, millisecondDelay);
                 }
                 else
                 {
@@ -127,13 +143,13 @@ namespace KWAssistant.Form
                 var temp = @"myPages[myPages.length - 2].click();";
                 for (var i = 0; i < jump; ++i)
                 {
-                    await ExecuteJsAsync(code + temp, cts);
+                    await ExecuteJsAsync(code + temp, cts, millisecondDelay);
                 }
                 var add = target - jump * 4 - 6;
                 if (add != 0)
                 {
                     temp = $@"myPages[{5 + add}].click();";
-                    await ExecuteJsAsync(code + temp, cts);
+                    await ExecuteJsAsync(code + temp, cts, millisecondDelay);
                 }
             }
         }
@@ -142,12 +158,13 @@ namespace KWAssistant.Form
         /// 百度搜索结果下一页
         /// </summary>
         /// <param name="cts"></param>
+        /// <param name="millisecondDelay"></param>
         /// <returns></returns>
-        public async Task NextPage(CancellationToken cts)
+        public async Task NextPage(CancellationToken cts, int millisecondDelay = 0)
         {
             var code = @"var myPages = document.querySelectorAll('#page a');" +
                        @"myPages[myPages.length - 1].click();";
-            await ExecuteJsAsync(code, cts);
+            await ExecuteJsAsync(code, cts, millisecondDelay);
         }
 
         /// <summary>

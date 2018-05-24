@@ -1,14 +1,14 @@
-﻿using KWAssistant.Data.Model;
-using Newtonsoft.Json;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
+using KWAssistant.Data.Model;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace KWAssistant.Util
+namespace KWAssistant.Helper
 {
     using dsl = Dictionary<string, List<string>>;
 
-    class FileUtil
+    class FileHelper
     {
         /// <summary>
         /// 读取关键词文件

@@ -1,9 +1,9 @@
-﻿using CefSharp;
+﻿using System;
+using CefSharp;
 using CefSharp.WinForms;
 using KWAssistant.Form;
-using System;
 
-namespace KWAssistant.Util
+namespace KWAssistant.Handler
 {
     class LifeSpanHandler : ILifeSpanHandler
     {
