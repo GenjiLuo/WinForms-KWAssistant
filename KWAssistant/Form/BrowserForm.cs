@@ -1,10 +1,10 @@
 ﻿using CefSharp;
 using CefSharp.WinForms;
+using KWAssistant.Handler;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using KWAssistant.Handler;
 
 namespace KWAssistant.Form
 {
@@ -12,7 +12,7 @@ namespace KWAssistant.Form
     {
         private readonly ChromiumWebBrowser _webBrowser;
 
-        private bool _isReady = false;  //首次加载完毕
+        private bool _isLoadEnd = false;  //首次加载完毕
 
         private bool _hasError = false; //网页加载是否出错
 
@@ -69,7 +69,7 @@ namespace KWAssistant.Form
 
         private void _webBrowser_FrameLoadEnd(object sender, FrameLoadEndEventArgs e)
         {
-            if (e.Frame.IsMain) _isReady = true;
+            if (e.Frame.IsMain) _isLoadEnd = true;
         }
 
         /// <summary>
@@ -92,7 +92,7 @@ namespace KWAssistant.Form
             _webBrowser.Load(url);
             await Task.Run(async () =>
             {
-                while (!_isReady)
+                while (!_isLoadEnd)
                 {
                     if (!_hasError) continue;
                     _hasError = false;
@@ -122,7 +122,7 @@ namespace KWAssistant.Form
         /// <param name="cts"></param>
         /// <param name="millisecondDelay"></param>
         /// <returns></returns>
-        public async Task PageTurn(int target, CancellationToken cts, int millisecondDelay = 0)
+        public async Task PageTurnTo(int target, CancellationToken cts, int millisecondDelay = 0)
         {
             var code = @"var myPages = document.querySelectorAll('#page a');";
             var jump = 0;
@@ -152,19 +152,6 @@ namespace KWAssistant.Form
                     await ExecuteJsAsync(code + temp, cts, millisecondDelay);
                 }
             }
-        }
-
-        /// <summary>
-        /// 百度搜索结果下一页
-        /// </summary>
-        /// <param name="cts"></param>
-        /// <param name="millisecondDelay"></param>
-        /// <returns></returns>
-        public async Task NextPage(CancellationToken cts, int millisecondDelay = 0)
-        {
-            var code = @"var myPages = document.querySelectorAll('#page a');" +
-                       @"myPages[myPages.length - 1].click();";
-            await ExecuteJsAsync(code, cts, millisecondDelay);
         }
 
         /// <summary>

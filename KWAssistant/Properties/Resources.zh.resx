@@ -156,4 +156,7 @@
   <data name="timeoutTip" xml:space="preserve">
     <value>超时</value>
   </data>
+  <data name="advertising" xml:space="preserve">
+    <value>广告</value>
+  </data>
 </root>

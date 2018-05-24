@@ -2,8 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Threading;
+using System.Threading.Tasks;
 using AngleSharp.Parser.Html;
 using KWAssistant.Data.Model;
+using Newtonsoft.Json.Linq;
 
 namespace KWAssistant.Helper
 {
@@ -11,9 +14,22 @@ namespace KWAssistant.Helper
     {
         private static readonly HtmlParser Parser;
 
+        private static readonly HttpClient Client;
+
         static HttpHelper()
         {
             Parser = new HtmlParser();
+            Client = new HttpClient();
+        }
+
+        /// <summary>
+        /// 获取当前网络IP
+        /// </summary>
+        /// <returns>IP地址</returns>
+        public static async Task<string> GetCurrentIpAsync(CancellationToken cts)
+        {
+            var res = await Client.GetAsync("https://ipapi.co/json/", cts);
+            return JObject.Parse(await res.Content.ReadAsStringAsync())["ip"]?.ToString();
         }
 
         /// <summary>
@@ -49,14 +65,14 @@ namespace KWAssistant.Helper
         }
 
         /// <summary>
-        /// 分析关键词搜索页面
+        /// 分析百度搜索结果页面，取得结果列表
         /// </summary>
         /// <param name="html">页面源码</param>
-        /// <returns>搜索结果集合</returns>
-        public static IEnumerable<SearchResult> Analyze(this string html)
+        /// <returns>搜索结果集合，不包含广告</returns>
+        public static IEnumerable<SearchResult> GetResults(this string html)
         {
             var document = Parser.Parse(html);
-            var cells = document.QuerySelectorAll("#content_left div.c-container"); //取得搜索结果列表
+            var cells = document.QuerySelectorAll(JsCodeHelper.ResultDivSelector); //取得搜索结果列表
             var i = 0;
             return from cell in cells
                    let head = cell.QuerySelector("h3 a")
@@ -66,7 +82,29 @@ namespace KWAssistant.Helper
                        Title = head.TextContent, //标题
                        Link = head.GetAttribute("href"), //百度重定向地址，link?url=
                        PartOfRealUri = cell.QuerySelector(".c-showurl")?.TextContent
-                                       ?? cell.QuerySelector(".g").TextContent //不完整的真实地址
+                                       ?? cell.QuerySelector(".g")?.TextContent
+                                       ?? string.Empty //不完整的真实地址
+                   };
+        }
+
+        /// <summary>
+        /// 分析百度搜索结果页面，取得广告列表
+        /// </summary>
+        /// <param name="html">页面源码</param>
+        /// <returns>广告集合</returns>
+        public static IEnumerable<SearchResult> GetAdvs(this string html)
+        {
+            var document = Parser.Parse(html);
+            var cells = document.QuerySelectorAll(JsCodeHelper.AdvDivSelector);
+            var i = 0;
+            return from cell in cells
+                   let head = cell.QuerySelector("a")
+                   select new SearchResult
+                   {
+                       Id = i++,
+                       Title = head.TextContent, //标题
+                       Link = head.GetAttribute("href"), //百度重定向地址，link?url=
+                       PartOfRealUri = head.GetAttribute("data-landurl")    //完整的真实地址
                    };
         }
     }

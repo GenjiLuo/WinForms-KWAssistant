@@ -61,6 +61,15 @@ namespace KWAssistant.Properties {
         }
         
         /// <summary>
+        ///   查找类似 advertising 的本地化字符串。
+        /// </summary>
+        internal static string advertising {
+            get {
+                return ResourceManager.GetString("advertising", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Task is running... 的本地化字符串。
         /// </summary>
         internal static string cannotAddTask {
