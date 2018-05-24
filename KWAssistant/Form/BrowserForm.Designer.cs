@@ -38,7 +38,6 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "BrowserForm";
             this.Text = "Browser";
-            this.VisibleChanged += new System.EventHandler(this.BrowserForm_VisibleChanged);
             this.ResumeLayout(false);
 
         }

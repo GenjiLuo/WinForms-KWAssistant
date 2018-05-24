@@ -21,6 +21,10 @@ namespace KWAssistant.Form
             InitializeComponent();
 
             //Enabled = false;    //用户不能操作浏览器
+            Visible = visible;
+            //不可视时不抢占主窗口的焦点
+            WindowState = visible ? FormWindowState.Normal : FormWindowState.Minimized;
+
             _webBrowser = new ChromiumWebBrowser(url)
             {
                 Dock = DockStyle.Fill,
@@ -34,7 +38,6 @@ namespace KWAssistant.Form
             };
 
             Controls.Add(_webBrowser);
-            Visible = visible;
             if (!isPopup && !visible)
             {
                 //激活浏览器
@@ -67,7 +70,6 @@ namespace KWAssistant.Form
             _webBrowser.Load(url);
             await Task.Run(async () =>
             {
-                await Task.Delay(500, cts);
                 while (_webBrowser.GetBrowser().IsLoading)
                 {
                     if (!_hasError) continue;
@@ -88,7 +90,6 @@ namespace KWAssistant.Form
             var res = await _webBrowser.GetBrowser().MainFrame.EvaluateScriptAsync(code);
             return await Task.Run(async () =>
             {
-                await Task.Delay(500, cts);
                 while (_webBrowser.GetBrowser().IsLoading)
                 {
                     if (!_hasError) continue;
@@ -126,15 +127,13 @@ namespace KWAssistant.Form
                 var temp = @"myPages[myPages.length - 2].click();";
                 for (var i = 0; i < jump; ++i)
                 {
-                    await ExecuteJsAsync(code, cts);
-                    await ExecuteJsAsync(temp, cts);
+                    await ExecuteJsAsync(code + temp, cts);
                 }
                 var add = target - jump * 4 - 6;
                 if (add != 0)
                 {
                     temp = $@"myPages[{5 + add}].click();";
-                    await ExecuteJsAsync(code, cts);
-                    await ExecuteJsAsync(temp, cts);
+                    await ExecuteJsAsync(code + temp, cts);
                 }
             }
         }
@@ -152,15 +151,17 @@ namespace KWAssistant.Form
         }
 
         /// <summary>
-        /// 保持所有子窗体与主窗体的可见性一致
+        /// 切换所有浏览器窗体的可视性，
+        /// 并且在不可视的情况下最小化窗体，可视时恢复正常
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void BrowserForm_VisibleChanged(object sender, EventArgs e)
+        public void ToggleVisible()
         {
+            Visible = !Visible;
+            WindowState = Visible ? FormWindowState.Normal : FormWindowState.Minimized;
             foreach (var popup in OwnedForms)
             {
                 popup.Visible = Visible;
+                popup.WindowState = Visible ? FormWindowState.Normal : FormWindowState.Minimized;
             }
         }
     }

@@ -55,9 +55,8 @@ namespace KWAssistant.Form
         private void MainForm_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode != Keys.F12) return;
-            var browser = OwnedForms.FirstOrDefault();
-            if (browser == null) return;
-            browser.Visible = !browser.Visible;
+            if (!(OwnedForms.FirstOrDefault() is BrowserForm browser)) return;
+            browser.ToggleVisible();
             _isShowBrowser = browser.Visible;
         }
         #endregion
@@ -124,7 +123,7 @@ namespace KWAssistant.Form
         }
 
         /// <summary>
-        /// 将任务列表重置为未执行的状态
+        /// 将任务列表重置为未执行的状态，点击量置零
         /// </summary>
         private void ResetTasks()
         {
@@ -137,6 +136,7 @@ namespace KWAssistant.Form
                 item.SubItems[3] = new ListViewItem.ListViewSubItem(item, record.Status); //更新界面
             }
             taskListView.EndUpdate();
+            hitsLabel.Text = "0";
         }
 
         /// <summary>
@@ -220,6 +220,7 @@ namespace KWAssistant.Form
                         {
                             taskListView.Items[record.Id - 1].Selected = true; //选中该任务所在的行，突出显示
                             taskListView.EnsureVisible(record.Id - 1); //滚动条划到该行
+                            currentTaskLabel.Text = record.Id.ToString();
 
                             var target = Global.Setting.PageMin;
                             while (target <= Global.Setting.PageMax) //浏览页数
@@ -265,6 +266,7 @@ namespace KWAssistant.Form
 
                                     record.Title = result.Title;
                                     AddLogItem(record); //打印日志
+                                    hitsLabel.Text = (int.Parse(hitsLabel.Text) + 1).ToString();
                                     logListView.EnsureVisible(logListView.Items.Count - 1);
                                 }
 
@@ -296,6 +298,7 @@ namespace KWAssistant.Form
                 {
                     taskListView.Items[record.Id - 1].Selected = true; //选中该任务所在的行，突出显示
                     taskListView.EnsureVisible(record.Id - 1); //滚动条划到该行
+                    currentTaskLabel.Text = record.Id.ToString();
 
                     var browser = new BrowserForm(visible: _isShowBrowser);
                     AddOwnedForm(browser);
@@ -339,6 +342,7 @@ namespace KWAssistant.Form
                             record.Title = result.Title;
                             record.Url = result.PartOfRealUri;
                             AddLogItem(record); //打印日志
+                            hitsLabel.Text = (int.Parse(hitsLabel.Text) + 1).ToString();
                             logListView.EnsureVisible(logListView.Items.Count - 1);
                         }
                         if (target != Global.Setting.PageMax)
