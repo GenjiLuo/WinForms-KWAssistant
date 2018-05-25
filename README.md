@@ -1,14 +1,16 @@
 # KWAssistant
-°Ù¶È¹Ø¼ü´ÊÖúÊÖ£¬Ë¢µã»÷£¬¿ÉÉèÖÃÒ³Êı¡¢ºÚ/°×Ãûµ¥¡£  
-Ö§³ÖÒÔÏÂÁ½ÖÖÄ£Ê½£º
-- ¿ìËÙÄ£Ê½£ºÊ¹ÓÃ `HttpClient` ÇëÇó×ÊÔ´
-- µã»÷Ä£Ê½£ºÊ¹ÓÃÄÚÖÃä¯ÀÀÆ÷Ä£Äâµã»÷£¬¿ÉÉèÖÃ¼ä¸ôÊ±¼ä¡¢Í£ÁôÊ±¼äµÈ¡£
+ç™¾åº¦å…³é”®è¯åŠ©æ‰‹ï¼Œåˆ·ç‚¹å‡»ï¼Œå¯è®¾ç½®é¡µæ•°ã€é»‘/ç™½åå•ã€‚  
+æ”¯æŒä»¥ä¸‹ä¸¤ç§æ¨¡å¼ï¼š
+- å¿«é€Ÿæ¨¡å¼ï¼šä½¿ç”¨ `HttpClient` è¯·æ±‚èµ„æº
+- ç‚¹å‡»æ¨¡å¼ï¼šä½¿ç”¨å†…ç½®æµè§ˆå™¨æ¨¡æ‹Ÿç‚¹å‡»ï¼Œå¯è®¾ç½®é—´éš”æ—¶é—´ã€åœç•™æ—¶é—´ç­‰ã€‚
 
 ## Requirements
-.NET Framework 4.6.2 »ò ¸ü¸ß
+- VC++ 2013/2015
+- .NET Framework 4.6.2 æˆ– æ›´é«˜
 
 ## Download
-°Ù¶ÈÔÆÅÌ£º[https://pan.baidu.com/s/1bLyF6qjD_6b8Qm_mR9mo5Q](https://pan.baidu.com/s/1bLyF6qjD_6b8Qm_mR9mo5Q) ÌáÈ¡Âë£ºvncy
+32 ä½ï¼š[https://pan.baidu.com/s/1-5GMFzI-PibZVh8Ep5UuiQ](https://pan.baidu.com/s/1-5GMFzI-PibZVh8Ep5UuiQ) æå–ç ï¼šcan4  
+64 ä½ï¼š[https://pan.baidu.com/s/1sEM_ti2IrqFP_OBpj2MqCQ](https://pan.baidu.com/s/1sEM_ti2IrqFP_OBpj2MqCQ) æå–ç ï¼š4z6s
 
 ## Screenshot
 ![screenshot](./screenshot.png)
