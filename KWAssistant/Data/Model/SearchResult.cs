@@ -24,5 +24,10 @@
         /// 不完整的真实地址
         /// </summary>
         public string PartOfRealUri { get; set; }
+
+        /// <summary>
+        /// 标记广告
+        /// </summary>
+        public bool IsAdv { get; set; }
     }
 }

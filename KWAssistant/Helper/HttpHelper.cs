@@ -28,7 +28,7 @@ namespace KWAssistant.Helper
         /// <returns>IP地址</returns>
         public static async Task<string> GetCurrentIpAsync(CancellationToken cts)
         {
-            var res = await Client.GetAsync("https://ipapi.co/json/", cts);
+            var res = await Client.GetAsync("https://ipapi.co/json/", cts).ConfigureAwait(false);
             return JObject.Parse(await res.Content.ReadAsStringAsync())["ip"]?.ToString();
         }
 
@@ -83,7 +83,8 @@ namespace KWAssistant.Helper
                        Link = head.GetAttribute("href"), //百度重定向地址，link?url=
                        PartOfRealUri = cell.QuerySelector(".c-showurl")?.TextContent
                                        ?? cell.QuerySelector(".g")?.TextContent
-                                       ?? string.Empty //不完整的真实地址
+                                       ?? string.Empty, //不完整的真实地址
+                       IsAdv = false
                    };
         }
 
@@ -104,7 +105,8 @@ namespace KWAssistant.Helper
                        Id = i++,
                        Title = head.TextContent, //标题
                        Link = head.GetAttribute("href"), //百度重定向地址，link?url=
-                       PartOfRealUri = head.GetAttribute("data-landurl")    //完整的真实地址
+                       PartOfRealUri = head.GetAttribute("data-landurl") ?? string.Empty,    //完整的真实地址
+                       IsAdv = true
                    };
         }
     }

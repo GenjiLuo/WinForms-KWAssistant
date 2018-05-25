@@ -49,7 +49,7 @@ namespace KWAssistant.Form
             ResumeLayout();
         }
 
-        private void BrowserForm_FormClosed(object sender, FormClosedEventArgs e)
+        private async void BrowserForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             _webBrowser.FrameLoadEnd -= _webBrowser_FrameLoadEnd;
             _webBrowser.LoadError -= _webBrowser_LoadError;
@@ -58,6 +58,7 @@ namespace KWAssistant.Form
                 popup.Dispose();
                 popup.Close();
             }
+            await Cef.GetGlobalCookieManager().DeleteCookiesAsync();
             _webBrowser.Dispose();
         }
 
@@ -78,7 +79,7 @@ namespace KWAssistant.Form
         /// <returns></returns>
         public async Task<string> GetSourceAsync()
         {
-            return await _webBrowser.GetBrowser().MainFrame.GetSourceAsync();
+            return await _webBrowser.GetBrowser().MainFrame.GetSourceAsync().ConfigureAwait(false);
         }
 
         /// <summary>
@@ -98,7 +99,7 @@ namespace KWAssistant.Form
                     _hasError = false;
                     throw new Exception(_errorText);
                 }
-            }, cts);
+            }, cts).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -110,8 +111,8 @@ namespace KWAssistant.Form
         /// <returns>执行结果</returns>
         public async Task<JavascriptResponse> ExecuteJsAsync(string code, CancellationToken cts, int millisecondDelay = 0)
         {
-            if (millisecondDelay != 0) await Task.Delay(millisecondDelay, cts);
-            var res = await _webBrowser.GetBrowser().MainFrame.EvaluateScriptAsync(code);
+            if (millisecondDelay != 0) await Task.Delay(millisecondDelay, cts).ConfigureAwait(false);
+            var res = await _webBrowser.GetBrowser().MainFrame.EvaluateScriptAsync(code).ConfigureAwait(false);
             return res;
         }
 
@@ -131,7 +132,7 @@ namespace KWAssistant.Form
                 if (target <= 10)
                 {
                     code += $@"myPages[{target - 2}].click();";
-                    await ExecuteJsAsync(code, cts, millisecondDelay);
+                    await ExecuteJsAsync(code, cts, millisecondDelay).ConfigureAwait(false);
                 }
                 else
                 {
@@ -143,13 +144,13 @@ namespace KWAssistant.Form
                 var temp = @"myPages[myPages.length - 2].click();";
                 for (var i = 0; i < jump; ++i)
                 {
-                    await ExecuteJsAsync(code + temp, cts, millisecondDelay);
+                    await ExecuteJsAsync(code + temp, cts, millisecondDelay).ConfigureAwait(false);
                 }
                 var add = target - jump * 4 - 6;
                 if (add != 0)
                 {
                     temp = $@"myPages[{5 + add}].click();";
-                    await ExecuteJsAsync(code + temp, cts, millisecondDelay);
+                    await ExecuteJsAsync(code + temp, cts, millisecondDelay).ConfigureAwait(false);
                 }
             }
         }
