@@ -430,7 +430,8 @@ namespace KWAssistant.Form
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //todo
+            new AboutForm { StartPosition = FormStartPosition.CenterParent }
+                .ShowDialog();
         }
         #endregion
 

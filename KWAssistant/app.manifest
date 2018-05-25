@@ -55,7 +55,7 @@
   </application>
 
   <!-- 启用 Windows 公共控件和对话框的主题(Windows XP 和更高版本) -->
-  <dependency>
+  <!--<dependency>
     <dependentAssembly>
       <assemblyIdentity
           type="win32"
@@ -66,6 +66,6 @@
           language="*"
         />
     </dependentAssembly>
-  </dependency>
+  </dependency>-->
 
 </assembly>
