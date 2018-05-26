@@ -71,8 +71,8 @@
             // 
             // WhiteListForm
             // 
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             resources.ApplyResources(this, "$this");
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.Controls.Add(label2);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.saveButton);

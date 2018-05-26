@@ -41,6 +41,10 @@ namespace KWAssistant
                 UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.181 Safari/537.36"
             };
 
+#if !DEBUG
+            settings.LogSeverity = LogSeverity.Disable;
+#endif
+
             // Make sure you set performDependencyCheck false
             Cef.Initialize(settings, false, null);
         }

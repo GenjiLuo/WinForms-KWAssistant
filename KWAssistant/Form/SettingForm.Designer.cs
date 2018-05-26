@@ -327,8 +327,8 @@
             // 
             // SettingForm
             // 
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             resources.ApplyResources(this, "$this");
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.Controls.Add(label8);
             this.Controls.Add(this.intervalMax);
             this.Controls.Add(this.intervalMin);

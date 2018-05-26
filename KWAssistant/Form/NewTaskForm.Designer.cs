@@ -54,8 +54,8 @@
             // 
             // NewTaskForm
             // 
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             resources.ApplyResources(this, "$this");
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.Controls.Add(this.newTaskButton);
             this.Controls.Add(this.newTaskTextBox);
             this.Controls.Add(label1);
