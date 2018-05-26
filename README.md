@@ -9,9 +9,10 @@
 - .NET Framework 4.6.2 或 更高
 
 ## Download
-百度云：[https://pan.baidu.com/s/1y9w3PxiX5JIpWhOL2_W46A](https://pan.baidu.com/s/1y9w3PxiX5JIpWhOL2_W46A) 提取码：02ot
+[下载地址](https://github.com/barry1101/WinForms-KWAssistant/wiki)
+
 ## Screenshot
-![screenshot](./screenshot.png)
+![screenshot](screenshot.png)
 
 ## Thank
 - [CefSharp](https://github.com/cefsharp/CefSharp)
