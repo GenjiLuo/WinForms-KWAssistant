@@ -62,8 +62,8 @@
             // 
             // NewGroupForm
             // 
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             resources.ApplyResources(this, "$this");
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.Controls.Add(this.newGroupTextBox);
             this.Controls.Add(label1);
             this.Controls.Add(this.cancelButton);

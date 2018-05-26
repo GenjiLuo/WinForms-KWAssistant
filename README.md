@@ -9,9 +9,7 @@
 - .NET Framework 4.6.2 或 更高
 
 ## Download
-32 位：[https://pan.baidu.com/s/1-5GMFzI-PibZVh8Ep5UuiQ](https://pan.baidu.com/s/1-5GMFzI-PibZVh8Ep5UuiQ) 提取码：can4  
-64 位：[https://pan.baidu.com/s/1sEM_ti2IrqFP_OBpj2MqCQ](https://pan.baidu.com/s/1sEM_ti2IrqFP_OBpj2MqCQ) 提取码：4z6s
-
+百度云：[https://pan.baidu.com/s/1y9w3PxiX5JIpWhOL2_W46A](https://pan.baidu.com/s/1y9w3PxiX5JIpWhOL2_W46A) 提取码：02ot
 ## Screenshot
 ![screenshot](./screenshot.png)
 

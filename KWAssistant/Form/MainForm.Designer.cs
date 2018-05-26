@@ -242,6 +242,7 @@
             // 
             // groupBox2
             // 
+            resources.ApplyResources(groupBox2, "groupBox2");
             groupBox2.Controls.Add(this.cleanLogButton);
             groupBox2.Controls.Add(this.loopCheckBox);
             groupBox2.Controls.Add(this.cleanTaskButton);
@@ -250,7 +251,6 @@
             groupBox2.Controls.Add(this.quickModeButton);
             groupBox2.Controls.Add(this.clickModeButton);
             groupBox2.Controls.Add(this.newTaskButton);
-            resources.ApplyResources(groupBox2, "groupBox2");
             groupBox2.Name = "groupBox2";
             groupBox2.TabStop = false;
             // 
@@ -336,8 +336,8 @@
             // 
             // groupBox3
             // 
-            groupBox3.Controls.Add(this.logListView);
             resources.ApplyResources(groupBox3, "groupBox3");
+            groupBox3.Controls.Add(this.logListView);
             groupBox3.Name = "groupBox3";
             groupBox3.TabStop = false;
             // 
@@ -439,8 +439,8 @@
             // 
             // MainForm
             // 
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             resources.ApplyResources(this, "$this");
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.Controls.Add(panel2);
             this.Controls.Add(panel1);
             this.Controls.Add(menuStrip1);

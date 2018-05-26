@@ -43,7 +43,7 @@
             pictureBox1.Anchor = System.Windows.Forms.AnchorStyles.None;
             pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             pictureBox1.Image = global::KWAssistant.Properties.Resources.g;
-            pictureBox1.Location = new System.Drawing.Point(223, 107);
+            pictureBox1.Location = new System.Drawing.Point(227, 107);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new System.Drawing.Size(150, 150);
             pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -65,7 +65,7 @@
             // 
             this.linkLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.linkLabel.AutoSize = true;
-            this.linkLabel.Location = new System.Drawing.Point(110, 314);
+            this.linkLabel.Location = new System.Drawing.Point(103, 314);
             this.linkLabel.Name = "linkLabel";
             this.linkLabel.Size = new System.Drawing.Size(399, 15);
             this.linkLabel.TabIndex = 1;
@@ -77,7 +77,7 @@
             // 
             this.label1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(269, 278);
+            this.label1.Location = new System.Drawing.Point(272, 278);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(61, 15);
             this.label1.TabIndex = 2;
@@ -85,8 +85,7 @@
             // 
             // AboutForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(608, 399);
             this.Controls.Add(label2);
             this.Controls.Add(this.label1);
