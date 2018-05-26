@@ -179,7 +179,10 @@ namespace KWAssistant.Form
             if (record.DwellTime == Resources.ignoreTask) item.ForeColor = Color.Blue;
             logListView.Items.Add(item);
             logListView.EnsureVisible(logListView.Items.Count - 1);
-            hitsLabel.Text = (int.Parse(hitsLabel.Text) + 1).ToString();    //更新点击量
+            if (record.DwellTime != Resources.ignoreTask)
+            {
+                hitsLabel.Text = (int.Parse(hitsLabel.Text) + 1).ToString();    //更新点击量
+            }
         }
 
         /// <summary>
